@@ -1,0 +1,107 @@
+:root {
+  --main-bg-color: brown;
+  --error-color: hsl(14, 100%, 53%);
+  --success-color: hsl(141, 71%, 48%);
+  --warning-color: hsl(48, 100%, 67%);
+}
+
+body {
+  font-family: 'Questrial', sans-serif;
+  color: #2b2b2b;
+}
+* {
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.nav {
+  width: 'flex';
+  flex-direction: column;
+}
+
+.nav > .nav-item {
+  display: inline-flex;
+  padding: 15px;
+}
+
+.nav.default {
+  background: #2b2b2b;
+  color: #ccc;
+}
+
+.input {
+  align-items: center;
+  padding: 15px;
+  padding-bottom: 0;
+}
+.input label {
+  margin-right: 15px;
+  padding: 10px;
+  padding-left: 0
+
+}
+.input input {
+  box-shadow: 1px 1px 10px transparent;
+  border: solid 1px;
+}
+
+.input.block input {
+  width: 100%;
+}
+.input.block {
+  flex-direction: column;
+}
+.input.block .label {
+  display: inline-flex;
+  align-self: baseline;
+}
+.input input:focus {
+  background: #ccc;
+}
+.input-sm {
+  padding: 10px 10px;
+}
+
+.input.has-error input {
+  color: var(--error-color);
+}
+
+.input.has-warning input {
+  color: var(--warning-color);
+}
+
+.input.has-success input {
+  color: var(--success-color);
+}
+
+.form.block {
+  flex-direction: column;
+}
+
+.form.block > * {
+  display: flex;
+  align-content: center;
+}
+
+.btn {
+    padding: 15px 25px;
+    border-radius: 7px;
+    box-sizing: border-box;
+    margin: 15px;
+    background: var(--success-color);
+    color: #FFF;
+    border: none;
+    display: inline-flex;
+    align-self: flex-end;
+}
+
+.btn:active {
+    background-blend-mode: multiply;
+}

@@ -1,0 +1,32 @@
+.formBlock {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    border-radius: 13px;
+    box-shadow: 1px 1px 100px #ccc;
+    padding: 20px;
+    padding-bottom: 50px;
+    position: relative;
+    background: #fff;
+  }
+  
+  .formBlockLabel {
+    position: absolute;
+  
+    padding: 30px;
+    background: #ccc;
+    z-index: -1;
+    right: 15px;
+    top: -65px;
+    font-weight: bolder;
+    border-radius: 7px;
+  }
+  
+  .background {
+    background: hsla(25, 99%, 61%, 0.438);
+    padding-top: 10%;
+    min-height: 100vh;
+  }
+  
