@@ -4,7 +4,7 @@ import { beginSignUp } from '../../store/actions/auth';
 import Input from '../../ui/Input/Input';
 import cssModule from './Register.module.css';
 import Button from '../../ui/Button/Button';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class Register extends Component {
   state = {
@@ -38,6 +38,9 @@ class Register extends Component {
       <form className={cssModule.formBlock} onSubmit={this.onSubmit}>
         <div className="form block">
           <h3>Registrati</h3>
+          <span style={{marginTop: '10px'}}>
+            Hai già un account? <Link style={{marginLeft: '5px'}} to="/login"> Accedi</Link>
+          </span>
           <Input
             onChange={this.onChangeInput('name')}
             placeholder="Mario"

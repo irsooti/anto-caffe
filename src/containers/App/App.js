@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Register from '../Register/Register';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import withAuthentication from '../../hoc/withAuthentication';
 import Login from '../Login/Login';
