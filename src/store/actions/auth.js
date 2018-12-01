@@ -63,11 +63,11 @@ export const authenticationFail = error => {
   };
 };
 
-export const authenticationSuccess = email => {
+export const authenticationSuccess = (email, displayName) => {
   return {
     type: actionTypes.AUTHENTICATION_SUCCESS,
     payload: {
-      user: { email }
+      user: { email, displayName }
     }
   };
 };

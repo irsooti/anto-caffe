@@ -1,40 +1,33 @@
 import React, { Component } from 'react';
 import Register from '../Register/Register';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Order from '../Order/Order';
 import withAuthentication from '../../hoc/withAuthentication';
 import Login from '../Login/Login';
+import { beginVerifyToken } from '../../store/actions/auth';
+import AuthenticatedArea from '../AuthenticatedArea/AuthenticatedArea';
+import NotFound from '../NotFound/NotFound';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.preAuthenticate();
+  }
+
   render() {
     return (
       <div className="full-height ">
-        {/* <nav className="nav default">
-          <a className="nav-item">asd</a>
-          <a className="nav-item">asd</a>
-          <a className="nav-item">asd</a>
-          <a className="nav-item">asd</a>
-        </nav> */}
-        <main>
-          <Router>
-            <Switch>
-              <Route
-                path="/ordini"
-                exact
-                component={withAuthentication(Order)}
-              />
-              <Route path="/register" exact component={Register} />
-              <Route path="/login" exact component={Login} />
-            </Switch>
-          </Router>
-        </main>
+        <Router>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={withAuthentication(AuthenticatedArea)}
+            />
+            <Route path="/register" exact component={Register} />
+            <Route path="/login" exact component={Login} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
       </div>
     );
   }
@@ -44,7 +37,9 @@ const mapStateToProps = ({ auth }) => ({
   isAuthenticated: auth.isAuthenticated
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => ({
+  preAuthenticate: token => dispatch(beginVerifyToken(token))
+});
 
 export default connect(
   mapStateToProps,

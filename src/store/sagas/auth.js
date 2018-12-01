@@ -16,10 +16,9 @@ export function* authenticationWorker(action) {
       throw new Error(response.error_status);
     }
 
-    yield localStorage.setItem('refreshToken', response.refreshToken);
     yield localStorage.setItem('username', response.email);
     yield localStorage.setItem('token', response.idToken);
-    yield localStorage.setItem('localId', response.localId);
+    yield localStorage.setItem('localId', response.uid);
     yield put(auth.authenticationSuccess(response.email));
   } catch (err) {
     yield put(auth.authenticationFail(err.message));
@@ -42,7 +41,7 @@ export function* signupWorker(action) {
       action.payload.nome,
       action.payload.cognome
     );
-    console.log(response)
+    console.log(response);
 
     // if (response.error_status) {
     //   throw new Error(response.error_status);
@@ -54,7 +53,7 @@ export function* signupWorker(action) {
     yield localStorage.setItem('localId', response.localId);
     yield put(auth.signupSuccess(response.email));
   } catch (err) {
-      console.log(err)
+    console.log(err);
     yield put(auth.signupFail(err.message));
     yield localStorage.removeItem('refreshToken');
     yield localStorage.removeItem('username');
@@ -69,15 +68,10 @@ export function* verifyTokenWorker(action) {
   yield put(auth.tokenIsVerifying(true));
 
   try {
-    let response = yield call(postVerifyToken, action.payload.token);
-    if (!localStorage.getItem('username')) {
-      throw new Error('Username misconfiguration');
-    }
-    yield localStorage.setItem('token', response.access_token);
-    yield localStorage.setItem('refreshToken', response.refresh_token);
-    yield localStorage.setItem('localId', response.user_id);
+    let response = yield call(postVerifyToken);
+    yield localStorage.setItem('localId', response.uid);
 
-    yield put(auth.authenticationSuccess(localStorage.getItem('username')));
+    yield put(auth.authenticationSuccess(response.email, response.displayName));
     yield put(auth.tokenVerifiedSuccess(response));
   } catch (err) {
     yield localStorage.removeItem('refreshToken');

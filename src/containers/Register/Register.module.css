@@ -14,7 +14,6 @@
 
 .formBlockLabel {
   position: absolute;
-
   padding: 30px;
   background: #ccc;
   z-index: -1;
@@ -25,7 +24,20 @@
 }
 
 .background {
-  background: hsla(25, 99%, 61%, 0.438);
+  background-image: url('../../assets/pattern.svg');
+  background-size: 300px;
+  background-blend-mode: difference;
+  background-color: hsla(44, 85%, 57%, 0.555);
   padding-top: 10%;
   min-height: 100vh;
+  animation: loop-pattern 300s linear infinite;
+}
+
+@keyframes loop-pattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -9300px
+  }
 }

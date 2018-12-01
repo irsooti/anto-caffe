@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { beginSignUp, beginAuthentication } from '../../store/actions/auth';
+import { beginSignUp } from '../../store/actions/auth';
 import Input from '../../ui/Input/Input';
 import cssModule from './Register.module.css';
 import Button from '../../ui/Button/Button';
+import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
   state = {
@@ -35,9 +36,8 @@ class Register extends Component {
   render() {
     const form = (
       <form className={cssModule.formBlock} onSubmit={this.onSubmit}>
-        <div className={cssModule.formBlockLabel}>Registrati</div>
-
         <div className="form block">
+          <h3>Registrati</h3>
           <Input
             onChange={this.onChangeInput('name')}
             placeholder="Mario"
@@ -77,6 +77,7 @@ class Register extends Component {
 
     return (
       <div className={cssModule.background}>
+        {this.props.isSuccess ? <Redirect to="/" /> : null}
         {this.props.isPending ? 'loading' : form}
       </div>
     );

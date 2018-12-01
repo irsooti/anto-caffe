@@ -1,5 +1,6 @@
-import { auth, initializeApp, database } from 'firebase/app';
+import { auth, initializeApp } from 'firebase/app';
 import 'firebase/auth';
+
 var config = {
   apiKey: 'AIzaSyD_C59csA_uJ5Z2YERhSeV9zg49RkaPz0c',
   authDomain: 'anto-caffe.firebaseapp.com',
@@ -14,18 +15,26 @@ initializeApp(config);
 export const postAuthentication = (email, pass) => {
   return auth().signInAndRetrieveDataWithEmailAndPassword(email, pass);
 };
-export const postVerifyToken = token => {
-  return auth().signInAndRetrieveDataWithCustomToken(token);
+export const postVerifyToken = () => {
+  return new Promise((resolve, reject) => {
+    auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log(user);
+        // User is signed in.
+        resolve(user);
+      }
+    });
+  });
 };
 
 export const signUp = async (email, pass, nome, cognome) => {
   let user = null;
-  let authUser = await auth().createUserWithEmailAndPassword(email, pass);
+  await auth().createUserWithEmailAndPassword(email, pass);
   user = auth().currentUser;
   user.sendEmailVerification();
   user.updateProfile({
-    displayName: nome + ' ' + cognome,
-  })
-
-  return authUser;
+    displayName: nome + ' ' + cognome
+  });
+  console.log(user);
+  return user;
 };

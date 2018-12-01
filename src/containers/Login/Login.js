@@ -4,6 +4,7 @@ import { beginAuthentication } from '../../store/actions/auth';
 import Input from '../../ui/Input/Input';
 import cssModule from './Login.module.css';
 import Button from '../../ui/Button/Button';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   state = {
@@ -33,8 +34,8 @@ class Login extends Component {
   render() {
     const form = (
       <form className={cssModule.formBlock} onSubmit={this.onSubmit}>
-        <div className={cssModule.formBlockLabel}>Accedi</div>
         <div className="form block">
+          <h3>Login</h3>
           <Input
             onChange={this.onChangeInput('email')}
             placeholder="email"
@@ -58,6 +59,7 @@ class Login extends Component {
 
     return (
       <div className={cssModule.background}>
+        {this.props.isSuccess ? <Redirect to="/" /> : null}
         {this.props.isPending ? 'loading' : form}
       </div>
     );

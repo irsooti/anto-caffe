@@ -1,5 +1,5 @@
 import React from 'react';
-import cssModule from './Input.module.css';
+// import cssModule from './Input.module.css';
 
 const SIZE = {
   small: 'input-sm',
