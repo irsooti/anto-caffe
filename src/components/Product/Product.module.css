@@ -3,4 +3,26 @@
   align-self: center;
   justify-content: center;
   align-content: center;
+  width: 100%;
+  align-items: center;
+  border: solid 1px #CCC;
+  box-shadow: 1px 1px 1px #CCC;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+.description {
+  width: 66.66%;
+}
+.productController {
+  width: 33.33%;
+  text-align: right
+}
+
+.quantity {
+  padding: 20px;
+  margin-right: 15px;
+  font-weight: bold;
+  color: var(--error-color);
+  border: dashed 3px;
+  border-radius: 7px;
 }

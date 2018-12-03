@@ -1,0 +1,17 @@
+.modal {
+    background: #FFF;
+    padding: 25px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 30px #CCC;
+    width: auto;
+    max-width: 1000px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 15px;
+}

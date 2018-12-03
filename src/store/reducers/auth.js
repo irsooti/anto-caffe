@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
         isAuthenticated: true,
         user: {
           ...state.user,
-          ...action.payload.user
+          ...action.payload.user,
+          uid: action.payload.uid
         }
       });
     case actionTypes.SIGN_UP_FAILURE:
@@ -45,6 +46,13 @@ const reducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: {}
       });
+
+    // case actionTypes.TOKEN_VALID: {
+    //   return updateState(state, {
+    //     isAuthenticated: false,
+    //     user: { ...state.user,  }
+    //   });
+    // }
 
     case actionTypes.AUTHENTICATION_PENDING:
       return updateState(state, { isPending: action.payload.isPending });

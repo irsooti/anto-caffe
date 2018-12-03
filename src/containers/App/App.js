@@ -7,6 +7,7 @@ import Login from '../Login/Login';
 import { beginVerifyToken } from '../../store/actions/auth';
 import AuthenticatedArea from '../AuthenticatedArea/AuthenticatedArea';
 import NotFound from '../NotFound/NotFound';
+import CollectiveOrders from '../CollectiveOrders/CollectiveOrders';
 
 class App extends Component {
   componentDidMount() {
@@ -18,13 +19,9 @@ class App extends Component {
       <div className="full-height ">
         <Router>
           <Switch>
-            <Route
-              path="/"
-              exact
-              component={withAuthentication(AuthenticatedArea)}
-            />
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
+            <Route path="/" component={withAuthentication(AuthenticatedArea)} />
             <Route component={NotFound} />
           </Switch>
         </Router>

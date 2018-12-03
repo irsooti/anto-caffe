@@ -19,7 +19,13 @@ export function* authenticationWorker(action) {
     yield localStorage.setItem('username', response.email);
     yield localStorage.setItem('token', response.idToken);
     yield localStorage.setItem('localId', response.uid);
-    yield put(auth.authenticationSuccess(response.email));
+    yield put(
+      auth.authenticationSuccess(
+        response.email,
+        response.displayName,
+        response.uid
+      )
+    );
   } catch (err) {
     yield put(auth.authenticationFail(err.message));
     yield localStorage.removeItem('refreshToken');
@@ -71,7 +77,13 @@ export function* verifyTokenWorker(action) {
     let response = yield call(postVerifyToken);
     yield localStorage.setItem('localId', response.uid);
 
-    yield put(auth.authenticationSuccess(response.email, response.displayName));
+    yield put(
+      auth.authenticationSuccess(
+        response.email,
+        response.displayName,
+        response.uid
+      )
+    );
     yield put(auth.tokenVerifiedSuccess(response));
   } catch (err) {
     yield localStorage.removeItem('refreshToken');

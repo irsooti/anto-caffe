@@ -3,17 +3,30 @@
   --error-color: hsl(14, 100%, 53%);
   --success-color: hsl(141, 71%, 48%);
   --warning-color: hsl(48, 100%, 67%);
-  --default-color: hsl(217, 71%, 53%)
+  --default-color: hsl(217, 71%, 53%);
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ul {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
   font-family: 'Questrial', sans-serif;
   color: #333131;
   font-size: 18px;
 }
 
-h6, h5, h4, h3, h2, h1 {
-  font-weight: bold
+h6,
+h5,
+h4,
+h3,
+h2,
+h1 {
+  font-weight: bold;
 }
 
 h6 {
@@ -67,7 +80,7 @@ a {
   border-bottom: solid 3px #ccc;
 }
 
-.nav>.nav-item {
+.nav > .nav-item {
   display: inline-flex;
   padding: 15px;
   color: inherit;
@@ -75,8 +88,9 @@ a {
   position: relative;
 }
 
-.nav>.nav-item:active:after, .nav>.nav-item.active:after {
-  content: "";
+.nav > .nav-item:active:after,
+.nav > .nav-item.active:after {
+  content: '';
   position: absolute;
   width: 100%;
   bottom: -3px;
@@ -98,7 +112,7 @@ a {
 .input label {
   margin-right: 15px;
   padding: 10px;
-  padding-left: 0
+  padding-left: 0;
 }
 
 .input input {
@@ -143,7 +157,7 @@ a {
   flex-direction: column;
 }
 
-.form.block>* {
+.form.block > * {
   display: flex;
   align-content: center;
 }
@@ -151,16 +165,39 @@ a {
 .btn {
   padding: 15px 25px;
   border-radius: 7px;
+  cursor: pointer;
   box-sizing: border-box;
   margin: 15px;
   background: var(--default-color);
-  color: #FFF;
+  color: #fff;
   border: none;
   display: inline-flex;
   align-self: flex-end;
   font-size: 1.2rem;
 }
 
-.btn:active {
+.btn:active,
+.btn:focus {
   background-blend-mode: multiply;
+  animation: onpress 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  outline: none;
+}
+
+.btn--disabled {
+    background: #CCC;
+    cursor: not-allowed;
+}
+
+.hr {
+  border: dotted 2px;
+  border-bottom-style: none;
+}
+
+@keyframes onpress {
+  from {
+    box-shadow: 1px 1px 30px #ccc;
+  }
+  to {
+    box-shadow: 1px 1px 0px #ccc;
+  }
 }

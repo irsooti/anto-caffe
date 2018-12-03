@@ -63,11 +63,11 @@ export const authenticationFail = error => {
   };
 };
 
-export const authenticationSuccess = (email, displayName) => {
+export const authenticationSuccess = (email, displayName, uid) => {
   return {
     type: actionTypes.AUTHENTICATION_SUCCESS,
     payload: {
-      user: { email, displayName }
+      user: { email, displayName, uid }
     }
   };
 };
@@ -126,3 +126,4 @@ export const redirectAfterLogin = path => {
     }
   };
 };
+
