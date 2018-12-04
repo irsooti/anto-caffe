@@ -8,14 +8,12 @@ export const postVerifyToken = () => {
   return new Promise((resolve, reject) => {
     auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log(user);
         // User is signed in.
         resolve(user);
       }
     });
   });
 };
-
 
 export const signUp = async (email, pass, nome, cognome) => {
   let user = null;
@@ -25,6 +23,5 @@ export const signUp = async (email, pass, nome, cognome) => {
   user.updateProfile({
     displayName: nome + ' ' + cognome
   });
-  console.log(user);
   return user;
 };

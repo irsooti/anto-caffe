@@ -9,8 +9,6 @@ import './global.css';
 import { initializeApp } from 'firebase/app';
 // import dotenv from 'dotenv';
 // import dotenvExpand from 'dotenv-expand';
-import { getDailyCheckout } from './api/orders';
-
 
 const {
   REACT_APP_APIKEY,
@@ -20,7 +18,6 @@ const {
   REACT_APP_STORAGE_BUCKET,
   REACT_APP_MSGING_SENDER
 } = process.env;
-console.log(process.env);
 
 var config = {
   apiKey: REACT_APP_APIKEY,
@@ -32,7 +29,6 @@ var config = {
 };
 
 initializeApp(config);
-console.log(getDailyCheckout());
 
 // console.log(addDailyCheckout([{"id":"-LSoIts-SsLbg9b-Zji8","descr":"Caffe"}]))
 

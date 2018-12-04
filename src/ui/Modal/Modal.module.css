@@ -1,4 +1,5 @@
 .modal {
+    display: inline-flex;
     background: #FFF;
     padding: 25px;
     border-radius: 7px;
@@ -6,6 +7,8 @@
     width: auto;
     max-width: 1000px;
     position: relative;
+    align-self: flex-start;
+    margin-top: 10%
 }
 
 .close {

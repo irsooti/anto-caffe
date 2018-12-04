@@ -2,8 +2,10 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-
+  padding: 15px;
+  align-self: center
 }
+
 .container {
   display: flex;
   width: 100%;
@@ -13,10 +15,16 @@
   padding: 25px;
   flex-direction: column;
   background: #FFF;
-
 }
+
 .title {
   text-align: center;
+  padding: 20px;
+}
+
+.footer {
+  text-align: right;
+  padding-top: 30px
 }
 
 .order {
@@ -31,12 +39,10 @@
   width: 100%;
   justify-content: flex-end;
 }
+
 .orderCount {
   display: flex;
   width: 200px;
   align-self: flex-end;
   justify-content: flex-end;
-}
-
-.body {
 }

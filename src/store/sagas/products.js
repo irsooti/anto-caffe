@@ -6,7 +6,6 @@ export function* retrievePostsWorker(action) {
   yield put(products.getProductsStatus(true));
   try {
     let response = yield call(getAllProducts);
-    console.log(response);
     yield put(products.getProductsWithSuccess(response));
   } catch (err) {
     console.log(err);
@@ -26,8 +25,7 @@ export function* checkoutWorker(action) {
       action.payload.displayName
     );
 
-    console.log(response)
-    yield put(products.checkoutSuccess({}));
+    yield put(products.checkoutSuccess(response));
   } catch (err) {
     console.log(err);
     yield put(products.checkoutFailed(err.message));

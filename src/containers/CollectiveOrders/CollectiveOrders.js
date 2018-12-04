@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { beginOrdersFlow } from '../../store/actions/orders';
 import cssModule from './CollectiveOrders.module.css';
+import Button from '../../ui/Button/Button';
+
+const { REACT_APP_ANTO_TEL } = process.env;
 class CollectiveOrders extends Component {
   componentDidMount() {
     this.props.onOrdersLoad();
@@ -20,7 +23,6 @@ class CollectiveOrders extends Component {
           <div className={cssModule.body}>
             {Object.keys(totalOrders).map((orderId, id) => (
               <div className={cssModule.order} key={id}>
-                {console.log(totalOrders)}
                 <span className={cssModule.orderName}>
                   {totalOrders[orderId].descr}
                 </span>
@@ -29,6 +31,14 @@ class CollectiveOrders extends Component {
                 </span>
               </div>
             ))}
+          </div>
+          <div className={cssModule.footer}>
+          {console.log(REACT_APP_ANTO_TEL)}
+            <Button
+              onClick={() => (window.location = 'tel:' + REACT_APP_ANTO_TEL)}
+              icon="fa fa-phone"
+              text="Chiama Antonio"
+            />
           </div>
         </div>
       </div>
@@ -58,7 +68,6 @@ function ordersReducer(orders = []) {
     if (!acc[key]) {
       acc[key] = { quantity: 0 };
     }
-    console.log(acc[key].quantity);
     acc[key].descr = currentOrder.descr;
     acc[key].quantity = currentOrder.quantity + acc[key].quantity;
     return acc;

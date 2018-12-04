@@ -41,7 +41,6 @@ class Order extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps.lastCheckout, this.props.lastCheckout);
     if (
       this.state.checkoutDone &&
       prevProps.lastCheckout !== this.props.lastCheckout

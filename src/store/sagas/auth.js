@@ -47,7 +47,6 @@ export function* signupWorker(action) {
       action.payload.nome,
       action.payload.cognome
     );
-    console.log(response);
 
     // if (response.error_status) {
     //   throw new Error(response.error_status);
@@ -76,7 +75,6 @@ export function* verifyTokenWorker(action) {
   try {
     let response = yield call(postVerifyToken);
 
-    console.log(response.uid)
     yield put(
       auth.authenticationSuccess(
         response.email,
