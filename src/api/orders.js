@@ -15,6 +15,8 @@ export const getDailyCheckout = () =>
         let orders = snapshot.val();
         let container = [];
 
+        if (!orders) return container;
+
         Object.keys(orders).map(orderId => {
           return Object.keys(orders[orderId]).map(authorId => {
             return orders[orderId][authorId].map(item => {
