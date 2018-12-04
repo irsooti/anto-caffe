@@ -7,7 +7,6 @@ import Login from '../Login/Login';
 import { beginVerifyToken } from '../../store/actions/auth';
 import AuthenticatedArea from '../AuthenticatedArea/AuthenticatedArea';
 import NotFound from '../NotFound/NotFound';
-import CollectiveOrders from '../CollectiveOrders/CollectiveOrders';
 
 class App extends Component {
   componentDidMount() {

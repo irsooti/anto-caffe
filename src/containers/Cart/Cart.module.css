@@ -1,11 +1,16 @@
+.cartWrapper {
+  padding: 15px;
+}
 .cart {
   width: 350px;
   margin-top: 10px;
   padding: 15px;
-  border: solid 1px #CCC;
-  box-shadow: 1px 1px 1px #ccc;
+  /* border: solid 1px #ccc; */
+  box-shadow: 1px 1px 20px #ccc;
   position: sticky;
+  border-radius: 7px;
   top: 15px;
+  background: #fff;
 }
 
 .content {
@@ -15,5 +20,28 @@
 }
 
 .footer {
-    text-align: right
+  text-align: right;
+}
+
+@media only screen and (max-width: 800px) {
+    .cartWrapper  {
+        position: fixed;
+        bottom: 0px;
+        padding: 0;
+        left: 0;
+        width: 100%;
+        display: block;
+    }
+
+    .cart h3 {
+        display: none;
+    }
+    .cart {
+        width: 100%;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .content {
+        display: none;
+    }
 }

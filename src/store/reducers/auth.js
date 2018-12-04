@@ -25,8 +25,7 @@ const reducer = (state = initialState, action) => {
         isAuthenticated: true,
         user: {
           ...state.user,
-          ...action.payload.user,
-          uid: action.payload.uid
+          ...action.payload.user
         }
       });
     case actionTypes.SIGN_UP_FAILURE:

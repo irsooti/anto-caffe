@@ -12,7 +12,7 @@ const CheckoutSummary = ({ cart, onConfirm }) => {
         style={{ display: 'flex', borderBottom: 'solid 1px' }}
         quantityClassName={cssModule.quantity}
         descrClassName={cssModule.descr}
-        cart={cart}
+        cart={cart.filter(filter => filter.quantity !== 0)}
       />
 
         <span style={{padding: '30px 10px', display: 'inline-block'}}>Se confermi, questa operazione non può essere annullata</span>

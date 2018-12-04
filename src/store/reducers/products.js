@@ -6,7 +6,8 @@ const initialState = {
   products: [],
   isError: null,
   errorMsg: null,
-  checkoutErrorMsg: null
+  checkoutErrorMsg: null,
+  lastCheckout: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -61,14 +62,15 @@ const reducer = (state = initialState, action) => {
       });
     }
     case actionTypes.CHECKOUT_SUCCESS: {
-      let products = action.payload.products.map(product => ({
+      let products = state.products.map(product => ({
         ...product,
         quantity: 0
       }));
 
       return updateState(state, {
         checkoutIsPending: action.payload.checkoutIsPending,
-        products: products
+        products: products,
+        lastCheckout: new Date()
       });
     }
 

@@ -5,17 +5,20 @@
   align-content: center;
   width: 100%;
   align-items: center;
-  border: solid 1px #CCC;
-  box-shadow: 1px 1px 1px #CCC;
+  /* border: solid 1px #CCC; */
+  box-shadow: 1px 1px 20px #CCC;
+  border-radius: 7px;
   padding: 15px;
   margin-bottom: 10px;
+  background: #FFF;
+
 }
 .description {
   width: 66.66%;
 }
 .productController {
   width: 33.33%;
-  text-align: right
+  justify-content: flex-end;
 }
 
 .quantity {

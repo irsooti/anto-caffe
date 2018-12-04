@@ -17,15 +17,17 @@ export function* retrievePostsWorker(action) {
 }
 
 export function* checkoutWorker(action) {
-    console.log(action)
   yield put(products.checkoutPendingStatus(true));
   try {
     let response = yield call(
       addDailyCheckout,
       action.payload.cart,
-      action.payload.uid
+      action.payload.uid,
+      action.payload.displayName
     );
-    yield put(products.checkoutSuccess(response));
+
+    console.log(response)
+    yield put(products.checkoutSuccess({}));
   } catch (err) {
     console.log(err);
     yield put(products.checkoutFailed(err.message));

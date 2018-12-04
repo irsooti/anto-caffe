@@ -6,19 +6,33 @@ import configStore from './store/configStore';
 import { unregister } from './serviceWorker';
 import 'reset-css';
 import './global.css';
-
 import { initializeApp } from 'firebase/app';
-import { getAllProducts, addProduct, addDailyCheckout } from './api/products';
+// import dotenv from 'dotenv';
+// import dotenvExpand from 'dotenv-expand';
+import { getDailyCheckout } from './api/orders';
+
+
+const {
+  REACT_APP_APIKEY,
+  REACT_APP_AUTH_DOMAIN,
+  REACT_APP_PROJECTID,
+  REACT_APP_DATABASE_URL,
+  REACT_APP_STORAGE_BUCKET,
+  REACT_APP_MSGING_SENDER
+} = process.env;
+console.log(process.env);
+
 var config = {
-  apiKey: 'AIzaSyD_C59csA_uJ5Z2YERhSeV9zg49RkaPz0c',
-  authDomain: 'anto-caffe.firebaseapp.com',
-  databaseURL: 'https://anto-caffe.firebaseio.com',
-  projectId: 'anto-caffe',
-  storageBucket: 'anto-caffe.appspot.com',
-  messagingSenderId: '217614003103'
+  apiKey: REACT_APP_APIKEY,
+  authDomain: REACT_APP_AUTH_DOMAIN,
+  databaseURL: REACT_APP_DATABASE_URL,
+  projectId: REACT_APP_PROJECTID,
+  storageBucket: REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_MSGING_SENDER
 };
 
 initializeApp(config);
+console.log(getDailyCheckout());
 
 // console.log(addDailyCheckout([{"id":"-LSoIts-SsLbg9b-Zji8","descr":"Caffe"}]))
 

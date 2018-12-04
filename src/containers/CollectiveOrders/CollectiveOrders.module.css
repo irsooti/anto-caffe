@@ -1,0 +1,42 @@
+.fullHeightContainer {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+
+}
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  border: dashed 3px;
+  padding: 25px;
+  flex-direction: column;
+  background: #FFF;
+
+}
+.title {
+  text-align: center;
+}
+
+.order {
+  border-bottom: solid 1px;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 15px 10px;
+}
+
+.orderName {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.orderCount {
+  display: flex;
+  width: 200px;
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.body {
+}

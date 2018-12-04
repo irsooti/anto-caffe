@@ -14,7 +14,9 @@ import {
 
 class Order extends Component {
   state = {
-    modal: false
+    modal: false,
+    checkoutDone: false,
+    total: {}
   };
 
   addToCart = id => () => {
@@ -29,11 +31,24 @@ class Order extends Component {
     this.setState({ modal: 'true' });
   };
 
-  resetCart = () => {};
-
   onCheckout = () => {
-    this.props.checkout(this.props.products, this.props.user.uid);
+    this.setState({ checkoutDone: true });
+    this.props.checkout(
+      this.props.products,
+      this.props.user.uid,
+      this.props.user.displayName
+    );
   };
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.lastCheckout, this.props.lastCheckout);
+    if (
+      this.state.checkoutDone &&
+      prevProps.lastCheckout !== this.props.lastCheckout
+    ) {
+      this.props.history.push('/orders');
+    }
+  }
 
   componentDidMount() {
     this.props.getProducts();
@@ -42,11 +57,8 @@ class Order extends Component {
   render() {
     const { products } = this.props;
     return (
-      <>
-        <div
-          style={{ width: '66.66%' }}
-          className={'container column ' + cssModule.order}
-        >
+      <div className={cssModule.OrderContainer}>
+        <div className={'container column ' + cssModule.order}>
           {products.map(product => (
             <Product
               key={product.id}
@@ -59,7 +71,7 @@ class Order extends Component {
           ))}
         </div>
 
-        <div style={{ width: '33.33%', paddingLeft: '15px' }}>
+        <div>
           <Cart onConfirm={this.onConfirm} cart={products} />
         </div>
         <Modal
@@ -68,14 +80,15 @@ class Order extends Component {
         >
           <CheckoutSummary onConfirm={this.onCheckout} cart={products} />
         </Modal>
-      </>
+      </div>
     );
   }
 }
 
 const mapStateToProps = ({ products, auth }) => ({
   products: products.products,
-  user: auth.user
+  user: auth.user,
+  lastCheckout: products.lastCheckout
 });
 
 const mapDispatchToProps = dispatch => ({

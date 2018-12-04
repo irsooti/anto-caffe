@@ -1,0 +1,35 @@
+import { database } from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
+
+export const getDailyCheckout = () =>
+  new Promise((resolve, reject) => {
+    let today = new Date();
+    let formatRef =
+      today.getDate() + '' + today.getFullYear() + '' + today.getMonth();
+    var ref = database().ref('checkout/' + formatRef);
+
+    ref.on(
+      'value',
+      function(snapshot) {
+        let orders = snapshot.val();
+        let container = [];
+
+        Object.keys(orders).map(orderId => {
+          return Object.keys(orders[orderId]).map(authorId => {
+            return orders[orderId][authorId].map(item => {
+              return container.push({
+                uid: authorId,
+                ...item
+              });
+            });
+          });
+        });
+
+        resolve(container);
+      },
+      function(error) {
+        reject(error.code);
+      }
+    );
+  });

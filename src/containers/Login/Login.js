@@ -63,7 +63,7 @@ class Login extends Component {
     return (
       <div className={cssModule.background}>
         {this.props.isSuccess ? <Redirect to="/" /> : null}
-        {this.props.isPending ? 'loading' : form}
+        {this.props.isPending ? '' : form}
       </div>
     );
   }

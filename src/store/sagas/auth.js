@@ -75,8 +75,8 @@ export function* verifyTokenWorker(action) {
 
   try {
     let response = yield call(postVerifyToken);
-    yield localStorage.setItem('localId', response.uid);
 
+    console.log(response.uid)
     yield put(
       auth.authenticationSuccess(
         response.email,
