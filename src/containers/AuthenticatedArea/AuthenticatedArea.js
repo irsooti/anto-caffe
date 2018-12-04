@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import Order from '../Order/Order';
 import cssModule from './AuthenticatedArea.module.css';
 import CollectiveOrders from '../CollectiveOrders/CollectiveOrders';
+import NotFound from '../NotFound/NotFound';
 class AuthenticatedArea extends Component {
   render() {
     return (
@@ -23,6 +24,7 @@ class AuthenticatedArea extends Component {
                 <Route path="/dailyorder" exact component={CollectiveOrders} />
                 <Route path="/order" exact component={Order} />
                 <Route path="/" exact component={Order} />
+                <Route component={NotFound} />
               </Switch>
             </Router>
           </div>

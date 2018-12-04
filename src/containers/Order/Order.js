@@ -46,7 +46,7 @@ class Order extends Component {
       this.state.checkoutDone &&
       prevProps.lastCheckout !== this.props.lastCheckout
     ) {
-      this.props.history.push('/orders');
+      this.props.history.push('/dailyorder');
     }
   }
 
