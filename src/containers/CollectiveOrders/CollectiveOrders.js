@@ -12,6 +12,7 @@ class CollectiveOrders extends Component {
   render() {
     const { orders } = this.props;
     const totalOrders = ordersReducer(orders);
+    const whoOrder = getWhoOrder(orders);
     if (this.props.orders.length > 0);
 
     return (
@@ -42,6 +43,16 @@ class CollectiveOrders extends Component {
               icon="fa fa-phone"
               text="Chiama Antonio"
             />
+
+            <hr />
+            <h4>Chi ha ordinato</h4>
+            <div>
+              {Object.keys(whoOrder).map(email => (
+                <div>
+                  {whoOrder[email]} - {email}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -73,6 +84,17 @@ function ordersReducer(orders = []) {
     }
     acc[key].descr = currentOrder.descr;
     acc[key].quantity = currentOrder.quantity + acc[key].quantity;
+    return acc;
+  }, {});
+}
+
+function getWhoOrder(orders = []) {
+  return orders.reduce((acc, currentOrder) => {
+    var key = currentOrder['email'];
+    if (!acc[key]) {
+      acc[key] = currentOrder['displayName'];
+    }
+
     return acc;
   }, {});
 }

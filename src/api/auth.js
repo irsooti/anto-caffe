@@ -25,3 +25,15 @@ export const signUp = async (email, pass, nome, cognome) => {
   });
   return user;
 };
+
+export const logout = () =>
+  new Promise((resolve, reject) => {
+    auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        auth()
+          .signOut()
+          .then(() => resolve(true));
+      }
+    });
+  });

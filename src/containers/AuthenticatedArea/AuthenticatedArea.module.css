@@ -12,3 +12,72 @@
   max-width: 1200px;
   margin: auto;
 }
+
+.mailNotVerifiedContainer {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+.layoutMailNotVerified {
+  display: flex;
+  background-size: 300px;
+  background-blend-mode: hard-light;
+  -webkit-backdrop-filter: opacity(0.3);
+  background-color: hsla(44, 85%, 57%, 0.411);
+  min-height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+.mailBlock {
+  display: block;
+  top: 0;
+  padding: 70px 25px;
+  border-radius: 7px;
+  position: relative;
+  background: #fff;
+  width: 100%;
+  margin: auto;
+  box-shadow: 1px 1px 100px #ccc;
+  text-align: center;
+  transform: rotate(0deg);
+  animation: pulse 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+}
+
+.envelop {
+  display: flex;
+  font-size: 2rem;
+  border-radius: 50%;
+  /* border: solid 3px; */
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  position: absolute;
+  top: -50px;
+  background: #fff;
+  box-shadow: 1px 1px 10px #ccc;
+}
+
+.mailBlockContent {
+  font-size: 1.5em;
+  line-height: 1.6
+}
+
+@keyframes pulse {
+  0% {
+    /* box-shadow: 1px 1px 100px #ccc; */
+    transform: rotate(.5deg)
+  }
+
+  50% {
+    transform: rotate(-1deg)
+  }
+
+  100% {
+    transform: rotate(.5deg)
+  }
+}

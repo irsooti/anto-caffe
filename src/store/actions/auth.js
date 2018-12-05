@@ -38,11 +38,11 @@ export const signupFail = error => {
   };
 };
 
-export const signupSuccess = email => {
+export const signupSuccess = (email, displayName, uid, emailVerified) => {
   return {
     type: actionTypes.SIGN_UP_SUCCESS,
     payload: {
-      user: { email }
+      user: { email, displayName, uid, emailVerified }
     }
   };
 };
@@ -63,11 +63,16 @@ export const authenticationFail = error => {
   };
 };
 
-export const authenticationSuccess = (email, displayName, uid) => {
+export const authenticationSuccess = (
+  email,
+  displayName,
+  uid,
+  emailVerified
+) => {
   return {
     type: actionTypes.AUTHENTICATION_SUCCESS,
     payload: {
-      user: { email, displayName, uid }
+      user: { email, displayName, uid, emailVerified }
     }
   };
 };
@@ -126,4 +131,3 @@ export const redirectAfterLogin = path => {
     }
   };
 };
-

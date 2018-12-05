@@ -1,5 +1,10 @@
 import { put, call } from 'redux-saga/effects';
-import { postAuthentication, postVerifyToken, signUp } from '../../api/auth';
+import {
+  postAuthentication,
+  postVerifyToken,
+  signUp,
+  logout
+} from '../../api/auth';
 import * as auth from '../actions/auth';
 
 export function* authenticationWorker(action) {
@@ -52,18 +57,15 @@ export function* signupWorker(action) {
     //   throw new Error(response.error_status);
     // }
 
-    yield localStorage.setItem('refreshToken', response.refreshToken);
-    yield localStorage.setItem('username', response.email);
-    yield localStorage.setItem('token', response.idToken);
-    yield localStorage.setItem('localId', response.localId);
-    yield put(auth.signupSuccess(response.email));
+    yield put(auth.signupSuccess(
+      response.email,
+      response.displayName,
+      response.uid,
+      response.emailVerified
+    ));
   } catch (err) {
     console.log(err);
     yield put(auth.signupFail(err.message));
-    yield localStorage.removeItem('refreshToken');
-    yield localStorage.removeItem('username');
-    yield localStorage.removeItem('token');
-    yield localStorage.removeItem('localId');
   } finally {
     yield put(auth.setSignupStatus(false));
   }
@@ -79,15 +81,12 @@ export function* verifyTokenWorker(action) {
       auth.authenticationSuccess(
         response.email,
         response.displayName,
-        response.uid
+        response.uid,
+        response.emailVerified
       )
     );
     yield put(auth.tokenVerifiedSuccess(response));
   } catch (err) {
-    yield localStorage.removeItem('refreshToken');
-    yield localStorage.removeItem('username');
-    yield localStorage.removeItem('token');
-    yield localStorage.removeItem('localId');
     yield put(auth.tokenVerifiedFailure());
   } finally {
     yield put(auth.tokenIsVerifying(false));
@@ -95,8 +94,11 @@ export function* verifyTokenWorker(action) {
 }
 
 export function* logoutWorker() {
-  yield localStorage.removeItem('refreshToken');
-  yield localStorage.removeItem('token');
-  yield localStorage.removeItem('username');
+  try {
+    yield call(logout);
+    yield localStorage.clear();
+  } catch (err) {
+    console.error(err);
+  }
   yield put(auth.logout());
 }

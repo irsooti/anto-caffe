@@ -26,7 +26,9 @@ const reducer = (state = initialState, action) => {
         user: {
           ...state.user,
           ...action.payload.user
-        }
+        },
+        signinError: null,
+        signupError: null
       });
     case actionTypes.SIGN_UP_FAILURE:
       return updateState(state, {

@@ -38,9 +38,17 @@ class Register extends Component {
       <form className={cssModule.formBlock} onSubmit={this.onSubmit}>
         <div className="form block">
           <h3>Registrati</h3>
-          <span style={{marginTop: '10px'}}>
-            Hai già un account? <Link style={{marginLeft: '5px'}} to="/login"> Accedi</Link>
+          <span style={{ marginTop: '10px' }}>
+            Hai già un account?{' '}
+            <Link style={{ marginLeft: '5px' }} to="/login">
+              {' '}
+              Accedi
+            </Link>
           </span>
+
+          {this.props.isError ? (
+            <div className={cssModule.errorBlock}>{this.props.isError}</div>
+          ) : null}
           <Input
             onChange={this.onChangeInput('name')}
             placeholder="Mario"
@@ -81,7 +89,7 @@ class Register extends Component {
     return (
       <div className={cssModule.background}>
         {this.props.isSuccess ? <Redirect to="/" /> : null}
-        {this.props.isPending ? 'loading' : form}
+        {this.props.isPending ? '' : form}
       </div>
     );
   }

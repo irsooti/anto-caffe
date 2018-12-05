@@ -37,8 +37,15 @@ class Login extends Component {
         <div className="form block">
           <h3>Login</h3>
           <span style={{ marginTop: '10px' }}>
-            Non hai un account? <Link style={{marginLeft: '5px'}} to="/register"> Registrati</Link>
+            Non hai un account?{' '}
+            <Link style={{ marginLeft: '5px' }} to="/register">
+              {' '}
+              Registrati
+            </Link>
           </span>
+          {this.props.isError ? (
+            <div className={cssModule.errorBlock}>{this.props.isError}</div>
+          ) : null}
           <Input
             onChange={this.onChangeInput('email')}
             placeholder="email"

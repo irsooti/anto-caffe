@@ -36,6 +36,14 @@
     display: flex;
     width: 100%;
   }
+
+  .errorBlock {
+      border: solid 2px var(--error-color);
+      padding: 5px;
+      color: var(--error-color);
+      margin-top: 10px;
+      line-height: 1.3;
+  }
   
   @keyframes loop-pattern {
     0% {

@@ -3,6 +3,7 @@ import React from 'react';
 export default function Button({
   onClick,
   text,
+  size = 'lg',
   type,
   disabled = false,
   icon
@@ -13,12 +14,12 @@ export default function Button({
     <input
       type="submit"
       value={text}
-      className={'btn ' + (disabled ? 'btn--disabled' : '')}
+      className={'btn btn--' + size + (disabled ? ' btn--disabled' : '')}
       onClick={!disabled ? onClick : null}
     />
   ) : (
     <button
-      className={'btn ' + (disabled ? 'btn--disabled' : '')}
+      className={'btn btn--' + size + (disabled ? ' btn--disabled' : '')}
       onClick={!disabled ? onClick : null}
     >
       {text} {iconElement}

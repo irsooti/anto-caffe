@@ -31,11 +31,13 @@ export const addDailyCheckout = (cart, uid, displayName, email) =>
     var ref = database()
       .ref('checkout/' + formatRef + '/' + uid)
       .push(
-        cart.map(c => {
-          c.displayName = displayName;
-          c.email = email;
-          return c;
-        })
+        cart
+          .filter(x => x.quantity !== 0)
+          .map(c => {
+            c.displayName = displayName;
+            c.email = email;
+            return c;
+          })
       );
 
     ref.on(
