@@ -22,7 +22,8 @@ export function* checkoutWorker(action) {
       addDailyCheckout,
       action.payload.cart,
       action.payload.uid,
-      action.payload.displayName
+      action.payload.displayName,
+      action.payload.email
     );
 
     yield put(products.checkoutSuccess(response));

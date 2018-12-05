@@ -48,9 +48,9 @@ export const removeProductFromCart = id => {
   };
 };
 
-export const beginCheckoutFlow = (cart, uid, displayName) => ({
+export const beginCheckoutFlow = (cart, uid, displayName, email) => ({
   type: actionTypes.BEGIN_CHECKOUT_FLOW,
-  payload: { cart, uid, displayName }
+  payload: { cart, uid, displayName, email }
 });
 
 export const checkoutSuccess = response => ({

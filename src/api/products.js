@@ -23,35 +23,20 @@ export const getAllProducts = () =>
     );
   });
 
-export const addDailyCheckout = (cart, uid) =>
-  new Promise((resolve, reject) => {
-    let today = new Date();
-    let formatRef =
-      today.getDate() + '' + today.getFullYear() + '' + today.getMonth();
-    var ref = database().ref(
-      'checkout/' + formatRef + '/' + uid
-    ).push(cart);
-
-    ref.on(
-      'value',
-      function(snapshot) {
-        let value = snapshot.val();
-        resolve(value);
-      },
-      function(error) {
-        reject(error.code);
-      }
-    );
-  });
-
-export const getDailyCheckout = cart =>
+export const addDailyCheckout = (cart, uid, displayName, email) =>
   new Promise((resolve, reject) => {
     let today = new Date();
     let formatRef =
       today.getDate() + '' + today.getFullYear() + '' + today.getMonth();
     var ref = database()
-      .ref('checkout/' + formatRef + auth().currentUser.getIdToken())
-      .push();
+      .ref('checkout/' + formatRef + '/' + uid)
+      .push(
+        cart.map(c => {
+          c.displayName = displayName;
+          c.email = email;
+          return c;
+        })
+      );
 
     ref.on(
       'value',

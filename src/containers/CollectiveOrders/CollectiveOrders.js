@@ -21,19 +21,22 @@ class CollectiveOrders extends Component {
             <h3>Ordini</h3>
           </div>
           <div className={cssModule.body}>
-            {Object.keys(totalOrders).map((orderId, id) => (
-              <div className={cssModule.order} key={id}>
-                <span className={cssModule.orderName}>
-                  {totalOrders[orderId].descr}
-                </span>
-                <span className={cssModule.orderCount}>
-                  {totalOrders[orderId].quantity}
-                </span>
-              </div>
-            ))}
+            {Object.keys(totalOrders).map((orderId, id) => {
+              if (totalOrders[orderId].quantity === 0) return null;
+              return (
+                <div className={cssModule.order} key={id}>
+                  <span className={cssModule.orderName}>
+                    {totalOrders[orderId].descr}
+                  </span>
+                  <span className={cssModule.orderCount}>
+                    {totalOrders[orderId].quantity}
+                  </span>
+                </div>
+              );
+            })}
           </div>
           <div className={cssModule.footer}>
-          {console.log(REACT_APP_ANTO_TEL)}
+            {console.log(REACT_APP_ANTO_TEL)}
             <Button
               onClick={() => (window.location = 'tel:' + REACT_APP_ANTO_TEL)}
               icon="fa fa-phone"

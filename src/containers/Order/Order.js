@@ -36,7 +36,8 @@ class Order extends Component {
     this.props.checkout(
       this.props.products,
       this.props.user.uid,
-      this.props.user.displayName
+      this.props.user.displayName,
+      this.props.user.email
     );
   };
 
@@ -94,7 +95,8 @@ const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProductsFlow()),
   addProductToCart: id => dispatch(addProductToCart(id)),
   removeProductToCart: id => dispatch(removeProductFromCart(id)),
-  checkout: (cart, uid) => dispatch(beginCheckoutFlow(cart, uid))
+  checkout: (cart, uid, displayName, email) =>
+    dispatch(beginCheckoutFlow(cart, uid, displayName, email))
 });
 
 export default connect(

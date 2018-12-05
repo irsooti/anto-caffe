@@ -16,6 +16,7 @@ class AuthenticatedArea extends Component {
           <NavLink className="nav-item" exact to="/order">
             Ordina
           </NavLink>
+          {/* <span>{this.props.displayName}</span> */}
         </nav>
         <div className={cssModule.layout}>
           <div>
