@@ -7,21 +7,22 @@ const SIZE = {
   large: 'input-lg'
 };
 
-export default function Input({
+export default ({
   type = 'text',
   block = false,
+  style = {},
   size = 'small',
   onChange = () => {},
   placeholder,
   label,
   required = false
-}) {
+}) => {
   let change = ({ target }) => {
     onChange(target.value);
   };
 
   return (
-    <div className={`input ${block ? 'block' : ''}`}>
+    <div style={style} className={`input ${block ? 'block' : ''}`}>
       {label ? <label className={'label '}>{label}</label> : null}
       <input
         required={required}
@@ -32,4 +33,4 @@ export default function Input({
       />
     </div>
   );
-}
+};

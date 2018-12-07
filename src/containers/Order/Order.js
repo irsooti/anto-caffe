@@ -69,6 +69,7 @@ class Order extends Component {
               onRemove={this.removeFromCart}
             />
           ))}
+          <Product isAddingProduct={true} />
         </div>
 
         <div>

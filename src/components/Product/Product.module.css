@@ -31,10 +31,14 @@
   border-radius: 7px;
 }
 
-.productController>* {
+.productController > * {
   display: flex;
   width: 30px;
   justify-content: center
+}
+
+.addProduct {
+  justify-content: right;
 }
 
 @media only screen and (max-width: 800px) {
