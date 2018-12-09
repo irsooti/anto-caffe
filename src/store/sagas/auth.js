@@ -14,7 +14,7 @@ export function* authenticationWorker(action) {
     let response = yield call(
       postAuthentication,
       action.payload.email,
-      action.payload.password
+      action.payload.password,
     );
 
     if (response.error_status) {
@@ -28,7 +28,8 @@ export function* authenticationWorker(action) {
       auth.authenticationSuccess(
         response.email,
         response.displayName,
-        response.uid
+        response.uid,
+        response.emailVerified
       )
     );
   } catch (err) {
