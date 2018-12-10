@@ -57,7 +57,7 @@ class AuthenticatedArea extends Component {
           <div>
             <Router>
               <Switch>
-                <Route path="/dailyorder" exact component={CollectiveOrders} />
+                <Route path="/dailyorder" component={CollectiveOrders} />
                 <Route path="/order" exact component={Order} />
                 <Route path="/" exact component={Order} />
                 <Route component={NotFound} />

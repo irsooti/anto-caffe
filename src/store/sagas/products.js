@@ -1,6 +1,10 @@
 import * as products from '../actions/products';
 import { put, call } from 'redux-saga/effects';
-import { getAllProducts, addDailyCheckout } from '../../api/products';
+import {
+  getAllProducts,
+  addDailyCheckout,
+  addProduct
+} from '../../api/products';
 
 export function* retrievePostsWorker(action) {
   yield put(products.getProductsStatus(true));
@@ -32,5 +36,18 @@ export function* checkoutWorker(action) {
     yield put(products.checkoutFailed(err.message));
   } finally {
     yield put(products.checkoutPendingStatus(false));
+  }
+}
+
+export function* addProductWorker(action) {
+  console.log(action)
+  yield put(products.addProductPendingStatus(true));
+  try {
+    let id = yield call(addProduct, action.payload.descr);
+    yield put(products.addProductWithSuccess(id, action.payload.descr));
+  } catch (err) {
+    yield put(products.addProductFailed(err.message));
+  } finally {
+    yield put(products.addProductPendingStatus(false));
   }
 }

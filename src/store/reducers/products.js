@@ -56,6 +56,27 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHECKOUT_FAILED: {
       return updateState(state, { checkoutErrorMsg: action.payload.err });
     }
+
+    case actionTypes.ADD_PRODUCT_FAILED: {
+      return updateState(state, { addProductErrorMsg: action.payload.err });
+    }
+
+    case actionTypes.ADD_PRODUCT_PENDING: {
+      return updateState(state, {
+        addProductIsPending: action.payload.addProductIsPending
+      });
+    }
+
+    case actionTypes.ADD_PRODUCT_SUCCESS: {
+      return updateState(state, {
+        products: state.products.concat({
+          descr: action.payload.descr,
+          id: action.payload.id,
+          quantity: 0
+        })
+      });
+    }
+
     case actionTypes.CHECKOUT_PENDING: {
       return updateState(state, {
         checkoutIsPending: action.payload.checkoutIsPending

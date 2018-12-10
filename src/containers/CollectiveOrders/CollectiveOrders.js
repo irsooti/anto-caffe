@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { database } from 'firebase/app';
 import { connect } from 'react-redux';
 import {
   beginOrdersFlow,
@@ -8,6 +7,9 @@ import {
 import cssModule from './CollectiveOrders.module.css';
 import Button from '../../ui/Button/Button';
 import { onDailyCheckoutChange } from '../../api/orders';
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
+import { ordersReducer, getWhoOrder } from '../../utils/order';
+import UserOrder from '../../components/UserOrders/UserOrder';
 
 const { REACT_APP_ANTO_TEL } = process.env;
 class CollectiveOrders extends Component {
@@ -63,12 +65,34 @@ class CollectiveOrders extends Component {
               {orders.length === 0 ? 'Nessuno ha ancora ordinato' : ''}
               {Object.keys(whoOrder).map(email => (
                 <div key={email}>
-                  {whoOrder[email]} - {email}
+                  <NavLink to={`${this.props.match.path}/${email}`}>
+                    {whoOrder[email]} - {email}
+                  </NavLink>
                 </div>
               ))}
             </div>
           </div>
         </div>
+
+        <Router>
+          <Route
+            path={`${this.props.match.path}/:email`}
+            render={props => (
+              <div className={cssModule.fullHeightContainer}>
+                <div className={cssModule.container}>
+                  <div className={cssModule.title}>
+                    <h3>Ordini di {orders[0].displayName}</h3>
+                  </div>
+                  <UserOrder
+                    orders={orders}
+                    email={props.match.params.email}
+                    cssModule={cssModule}
+                  />
+                </div>
+              </div>
+            )}
+          />
+        </Router>
       </div>
     );
   }
@@ -89,27 +113,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CollectiveOrders);
-
-function ordersReducer(orders = []) {
-  if (orders.length === 0) return orders;
-  return orders.reduce((acc, currentOrder) => {
-    var key = currentOrder['id'];
-    if (!acc[key]) {
-      acc[key] = { quantity: 0 };
-    }
-    acc[key].descr = currentOrder.descr;
-    acc[key].quantity = currentOrder.quantity + acc[key].quantity;
-    return acc;
-  }, {});
-}
-
-function getWhoOrder(orders = []) {
-  return orders.reduce((acc, currentOrder) => {
-    var key = currentOrder['email'];
-    if (!acc[key]) {
-      acc[key] = currentOrder['displayName'];
-    }
-
-    return acc;
-  }, {});
-}

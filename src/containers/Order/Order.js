@@ -9,7 +9,8 @@ import {
   getProductsFlow,
   addProductToCart,
   removeProductFromCart,
-  beginCheckoutFlow
+  beginCheckoutFlow,
+  beginAddProductFlow
 } from '../../store/actions/products';
 
 class Order extends Component {
@@ -69,7 +70,7 @@ class Order extends Component {
               onRemove={this.removeFromCart}
             />
           ))}
-          <Product isAddingProduct={true} />
+          <Product onAdd={this.props.addProductToDatabase} isAddingProduct={true} />
         </div>
 
         <div>
@@ -97,7 +98,8 @@ const mapDispatchToProps = dispatch => ({
   addProductToCart: id => dispatch(addProductToCart(id)),
   removeProductToCart: id => dispatch(removeProductFromCart(id)),
   checkout: (cart, uid, displayName, email) =>
-    dispatch(beginCheckoutFlow(cart, uid, displayName, email))
+    dispatch(beginCheckoutFlow(cart, uid, displayName, email)),
+  addProductToDatabase: (productName) => dispatch(beginAddProductFlow(productName))
 });
 
 export default connect(

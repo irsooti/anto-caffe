@@ -71,3 +71,29 @@ export const checkoutPendingStatus = bool => ({
     checkoutIsPending: bool
   }
 });
+
+export const beginAddProductFlow = (productName) => ({
+  type: actionTypes.BEGIN_ADD_PRODUCT_FLOW,
+  payload: {
+    descr: productName
+  }
+})
+
+export const addProductWithSuccess = (id, descr) => ({
+  type: actionTypes.ADD_PRODUCT_SUCCESS,
+  payload: { id, descr }
+});
+
+export const addProductFailed = err => ({
+  type: actionTypes.ADD_PRODUCT_FAILED,
+  payload: {
+    err
+  }
+});
+
+export const addProductPendingStatus = bool => ({
+  type: actionTypes.ADD_PRODUCT_PENDING,
+  payload: {
+    addProductIsPending: bool
+  }
+});

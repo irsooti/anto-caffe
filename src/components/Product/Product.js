@@ -24,22 +24,35 @@ const ExistingProduct = ({
   );
 };
 
-const AddNewProduct = ({ onAdd = () => {} }) => {
-  return (
-    <>
-      <div className={CssModule.description}>
-        <Input
-          block={true}
-          style={{ paddingBottom: '15px', width: '100%' }}
-          placeholder="...WIP"
-        />
-      </div>
-      <div className={CssModule.addProduct}>
-        <Button onClick={onAdd} text="Aggiungi" />
-      </div>
-    </>
-  );
-};
+class AddNewProduct extends React.Component {
+  onClick = () => {
+    this.props.onAdd(this.state.value);
+  };
+
+  onChangeHandler = value => {
+    this.setState({ value: value });
+  };
+  state = {
+    value: ''
+  };
+  render() {
+    return (
+      <>
+        <div className={CssModule.description}>
+          <Input
+            block={true}
+            onChange={this.onChangeHandler}
+            style={{ paddingBottom: '15px', width: '100%' }}
+            placeholder={this.props.placeholder}
+          />
+        </div>
+        <div className={CssModule.addProduct}>
+          <Button onClick={this.onClick} text="Aggiungi" />
+        </div>
+      </>
+    );
+  }
+}
 
 const Product = ({
   descr,

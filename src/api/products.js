@@ -56,12 +56,13 @@ export const addProduct = productName =>
   new Promise((resolve, reject) => {
     var ref = database()
       .ref('products')
-      .push({ descr: 'caffe' });
+      .push({ descr: productName });
 
     ref.on(
       'value',
-      function(snapshot) {
-        resolve(snapshot.val());
+      function(snapshot, b) {
+        console.log(b)
+        resolve(snapshot.key);
       },
       function(error) {
         reject(error.code);

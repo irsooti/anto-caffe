@@ -18,6 +18,10 @@ export function* rootSaga() {
       products.retrievePostsWorker
     ),
     yield takeLatest(actionTypes.BEGIN_ORDERS_FLOW, orders.ordersFlowWorker),
-    yield takeLatest(actionTypes.BEGIN_CHECKOUT_FLOW, products.checkoutWorker)
+    yield takeLatest(actionTypes.BEGIN_CHECKOUT_FLOW, products.checkoutWorker),
+    yield takeLatest(
+      actionTypes.BEGIN_ADD_PRODUCT_FLOW,
+      products.addProductWorker
+    )
   ]);
 }
