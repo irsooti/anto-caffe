@@ -80,9 +80,7 @@ class CollectiveOrders extends Component {
             render={props => (
               <div className={cssModule.fullHeightContainer}>
                 <div className={cssModule.container}>
-                  <div className={cssModule.title}>
-                    <h3>Ordini di {orders[0].displayName}</h3>
-                  </div>
+
                   <UserOrder
                     orders={orders}
                     email={props.match.params.email}
