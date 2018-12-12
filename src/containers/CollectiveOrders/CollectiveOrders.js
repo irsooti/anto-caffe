@@ -34,7 +34,12 @@ class CollectiveOrders extends Component {
           </div>
           <div className={cssModule.body}>
             {orders.length === 0 ? (
-              <div className={cssModule.order}>Nessuno ha ancora ordinato</div>
+              <div
+                style={{ textAlign: 'right', display: 'block' }}
+                className={cssModule.order}
+              >
+                Nessuno ha ancora ordinato
+              </div>
             ) : (
               ''
             )}
@@ -62,7 +67,9 @@ class CollectiveOrders extends Component {
             <hr />
             <h4>Chi ha ordinato</h4>
             <div>
-              {orders.length === 0 ? 'Nessuno ha ancora ordinato' : ''}
+              <div style={{ textAlign: 'right' }}>
+                {orders.length === 0 ? 'Nessuno ha ancora ordinato' : ''}
+              </div>
               {Object.keys(whoOrder).map(email => (
                 <div key={email}>
                   <NavLink to={`${this.props.match.path}/${email}`}>
@@ -80,7 +87,6 @@ class CollectiveOrders extends Component {
             render={props => (
               <div className={cssModule.fullHeightContainer}>
                 <div className={cssModule.container}>
-
                   <UserOrder
                     orders={orders}
                     email={props.match.params.email}

@@ -77,6 +77,13 @@ a {
   /* place-content: flex-end; */
 }
 
+.toolbarOpen {
+  overflow: hidden;
+}
+
+.modalOpen {
+  overflow: hidden;
+}
 .nav {
   width: 'flex';
   flex-direction: column;

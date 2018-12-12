@@ -4,8 +4,8 @@ import style from './Backdrop.module.css';
 const backdrop = ({ visible = false, children, toggle = () => {} }) => {
   let classes = [style.Backdrop];
 
-  if (visible) document.querySelector('body').style.overflow = 'hidden';
-  else document.querySelector('body').style.overflow = 'initial';
+  if (visible) document.querySelector('body').classList.add('modalOpen');
+  else document.querySelector('body').classList.remove('modalOpen');
 
   visible ? classes.push(style.open) : classes.push(style.closed);
 

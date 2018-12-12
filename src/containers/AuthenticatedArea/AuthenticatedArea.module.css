@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.layout > div {
+.layout>div {
   max-width: 1200px;
   margin: auto;
 }
@@ -18,6 +18,12 @@
   width: 100%;
   max-width: 800px;
   height: auto;
+}
+
+.commonArea {
+  position: relative;
+  left: 0;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1)
 }
 
 .layoutMailNotVerified {
@@ -72,11 +78,9 @@
     /* box-shadow: 1px 1px 100px #ccc; */
     transform: rotate(.5deg)
   }
-
   50% {
     transform: rotate(-1deg)
   }
-
   100% {
     transform: rotate(.5deg)
   }
