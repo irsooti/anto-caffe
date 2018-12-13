@@ -24,7 +24,13 @@ class Register extends Component {
   onSubmit = evt => {
     const { name, surname, email, password } = this.state;
 
-    if (!name || !surname || !email || !password) return false;
+    if (
+      !name ||
+      !surname ||
+      !email ||
+      !password
+    )
+      return false;
 
     evt.preventDefault();
 
@@ -37,7 +43,7 @@ class Register extends Component {
     const form = (
       <form className={cssModule.formBlock} onSubmit={this.onSubmit}>
         <div className="form block">
-          <h3>Registrati</h3>
+          <h3>Registrati*</h3>
           <span style={{ marginTop: '10px' }}>
             Hai già un account?{' '}
             <Link style={{ marginLeft: '5px' }} to="/login">
@@ -67,7 +73,7 @@ class Register extends Component {
           />
           <Input
             onChange={this.onChangeInput('email')}
-            placeholder="email"
+            placeholder="utente@aesystech.it"
             label="Email"
             block={true}
             required={true}
@@ -83,6 +89,7 @@ class Register extends Component {
           />
         </div>
         <Button type="submit" text="Invia" />
+        <div>* Solo con account @aesystech.it</div>
       </form>
     );
 

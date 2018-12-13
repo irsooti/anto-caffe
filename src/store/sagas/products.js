@@ -30,6 +30,8 @@ export function* checkoutWorker(action) {
       action.payload.email
     );
 
+    console.log(response)
+
     yield put(products.checkoutSuccess(response));
   } catch (err) {
     console.log(err);

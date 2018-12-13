@@ -14,24 +14,31 @@ export function* authenticationWorker(action) {
     let response = yield call(
       postAuthentication,
       action.payload.email,
-      action.payload.password,
+      action.payload.password
     );
 
     if (response.error_status) {
       throw new Error(response.error_status);
     }
 
-    yield localStorage.setItem('username', response.email);
-    yield localStorage.setItem('token', response.idToken);
-    yield localStorage.setItem('localId', response.uid);
-    yield put(
-      auth.authenticationSuccess(
-        response.email,
-        response.displayName,
-        response.uid,
-        response.emailVerified
-      )
-    );
+    if (
+      response.user.email.endsWith('@aesystech.it') ||
+      response.user.email.endsWith('@aesys.tech')
+    ) {
+      yield put(
+        auth.authenticationSuccess(
+          response.user.email,
+          response.user.displayName,
+          response.user.uid,
+          response.user.emailVerified
+        )
+      );
+    } else {
+      yield put(auth.logoutFlow());
+      throw new Error('Abbiamo disabilitato gli account non Aesys!');
+    }
+
+    console.log(response);
   } catch (err) {
     yield put(auth.authenticationFail(err.message));
     yield localStorage.removeItem('refreshToken');
@@ -58,12 +65,14 @@ export function* signupWorker(action) {
     //   throw new Error(response.error_status);
     // }
 
-    yield put(auth.signupSuccess(
-      response.email,
-      response.displayName,
-      response.uid,
-      response.emailVerified
-    ));
+    yield put(
+      auth.signupSuccess(
+        response.email,
+        response.displayName,
+        response.uid,
+        response.emailVerified
+      )
+    );
   } catch (err) {
     console.log(err);
     yield put(auth.signupFail(err.message));
@@ -78,14 +87,23 @@ export function* verifyTokenWorker(action) {
   try {
     let response = yield call(postVerifyToken);
 
-    yield put(
-      auth.authenticationSuccess(
-        response.email,
-        response.displayName,
-        response.uid,
-        response.emailVerified
-      )
-    );
+    if (
+      response.email.endsWith('@aesystech.it') ||
+      response.email.endsWith('@aesys.tech')
+    ) {
+      yield put(
+        auth.authenticationSuccess(
+          response.email,
+          response.displayName,
+          response.uid,
+          response.emailVerified
+        )
+      );
+    } else {
+      yield put(auth.logoutFlow());
+      throw new Error('Abbiamo disabilitato gli account non Aesys!');
+    }
+
     yield put(auth.tokenVerifiedSuccess(response));
   } catch (err) {
     yield put(auth.tokenVerifiedFailure());
@@ -96,8 +114,8 @@ export function* verifyTokenWorker(action) {
 
 export function* logoutWorker() {
   try {
-    yield call(logout);
-    yield localStorage.clear();
+    let response = yield call(logout);
+    console.log(response);
   } catch (err) {
     console.error(err);
   }

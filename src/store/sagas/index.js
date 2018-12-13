@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as auth from './auth';
 import * as products from './products';
 import * as orders from './orders';
@@ -11,7 +11,7 @@ export function* rootSaga() {
       auth.authenticationWorker
     ),
     yield takeLatest(actionTypes.VERIFYING_TOKEN_FLOW, auth.verifyTokenWorker),
-    yield takeLatest(actionTypes.LOGOUT_FLOW, auth.logoutWorker),
+    yield takeEvery(actionTypes.LOGOUT_FLOW, auth.logoutWorker),
     yield takeLatest(actionTypes.SIGN_UP_FLOW, auth.signupWorker),
     yield takeLatest(
       actionTypes.GET_PRODUCTS_FLOW,

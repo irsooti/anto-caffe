@@ -6,7 +6,7 @@ import cssModule from './AuthenticatedArea.module.css';
 import CollectiveOrders from '../CollectiveOrders/CollectiveOrders';
 import NotFound from '../NotFound/NotFound';
 import Button from '../../ui/Button/Button';
-import { logout } from '../../store/actions/auth';
+import { logoutFlow } from '../../store/actions/auth';
 import Toolbar from '../Toolbar/Toolbar';
 import MessageBar from '../../ui/MessageBar/MessageBar';
 class AuthenticatedArea extends Component {
@@ -22,19 +22,13 @@ class AuthenticatedArea extends Component {
     const navbar = (
       <nav className="nav default">
         <div className="nav--left">
-          <span className="nav-item">
-            <span
-              style={{ cursor: 'pointer' }}
-              onClick={this.toggleToolbar}
-              className="fa fa-bars"
-            />
+          <span
+            className="nav-item"
+            style={{ cursor: 'pointer', padding: '15px 25px' }}
+            onClick={this.toggleToolbar}
+          >
+            <span className="fa fa-bars" />
           </span>
-          {/* <NavLink className="nav-item" exact to="/dailyorder">
-            Gli ordini di oggi
-          </NavLink>
-          <NavLink className="nav-item" exact to="/order">
-            Ordina
-          </NavLink> */}
         </div>
         <div className="nav--right">
           <span>
@@ -115,7 +109,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogout: () => dispatch(logout())
+    onLogout: () => dispatch(logoutFlow())
   };
 };
 

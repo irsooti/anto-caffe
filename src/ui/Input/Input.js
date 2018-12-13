@@ -15,6 +15,7 @@ export default ({
   onChange = () => {},
   placeholder,
   label,
+  currentPassword = false,
   required = false
 }) => {
   let change = ({ target }) => {
@@ -30,6 +31,7 @@ export default ({
         type={type}
         placeholder={placeholder}
         className={`${SIZE[size]} `}
+        current-password={currentPassword.toString()}
       />
     </div>
   );

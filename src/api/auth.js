@@ -17,6 +17,9 @@ export const postVerifyToken = () => {
 
 export const signUp = async (email, pass, nome, cognome) => {
   let user = null;
+  if (!email.endsWith('@aesystech.it') || !email.endsWith('@aesys.tech')) {
+    throw new Error('La mail deve essere aesys!');
+  }
   await auth().createUserWithEmailAndPassword(email, pass);
   user = auth().currentUser;
   user.sendEmailVerification();
@@ -28,12 +31,10 @@ export const signUp = async (email, pass, nome, cognome) => {
 
 export const logout = () =>
   new Promise((resolve, reject) => {
-    auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        auth()
-          .signOut()
-          .then(() => resolve(true));
-      }
-    });
+    // User is signed in.
+    auth()
+      .signOut()
+      .then(() => {
+        resolve(true);
+      });
   });

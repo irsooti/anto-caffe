@@ -60,6 +60,7 @@ class Login extends Component {
             label="Password"
             required={true}
             type="password"
+            currentPassword={true}
             block={true}
           />
         </div>

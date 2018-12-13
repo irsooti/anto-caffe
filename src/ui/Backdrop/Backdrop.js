@@ -1,15 +1,23 @@
 import React from 'react';
 import style from './Backdrop.module.css';
 
-const backdrop = ({ visible = false, children, toggle = () => {} }) => {
-  let classes = [style.Backdrop];
+class Backdrop extends React.Component {
+  componentWillUnmount() {
+    document.querySelector('body').classList.remove('modalOpen');
+  }
 
-  if (visible) document.querySelector('body').classList.add('modalOpen');
-  else document.querySelector('body').classList.remove('modalOpen');
+  render() {
+    const { visible, children } = this.props;
+    let classes = [style.Backdrop];
+    if (visible) {
+      document.querySelector('body').classList.add('modalOpen');
+      visible ? classes.push(style.open) : classes.push(style.closed);
+    } else {
+      document.querySelector('body').classList.remove('modalOpen');
+    }
 
-  visible ? classes.push(style.open) : classes.push(style.closed);
+    return visible ? <div className={classes.join(' ')}>{children}</div> : null;
+  }
+}
 
-  return visible ? <div className={classes.join(' ')}>{children}</div> : null;
-};
-
-export default backdrop;
+export default Backdrop;

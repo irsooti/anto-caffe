@@ -12,3 +12,11 @@
 .descr {
   display: inline-flex;
 }
+
+.errorBlock {
+  border: solid 2px var(--error-color);
+  padding: 25px;
+  color: var(--error-color);
+  margin-top: 20px;
+  line-height: 1.3;
+}

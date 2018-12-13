@@ -84,7 +84,11 @@ class Order extends Component {
           visible={this.state.modal}
           toggle={() => this.setState({ modal: false })}
         >
-          <CheckoutSummary onConfirm={this.onCheckout} cart={products} />
+          <CheckoutSummary
+            onConfirm={this.onCheckout}
+            cart={products}
+            errorMsg={this.props.errorMsg}
+          />
         </Modal>
       </div>
     );
@@ -94,7 +98,8 @@ class Order extends Component {
 const mapStateToProps = ({ products, auth }) => ({
   products: products.products,
   user: auth.user,
-  lastCheckout: products.lastCheckout
+  lastCheckout: products.lastCheckout,
+  errorMsg: products.checkoutErrorMsg
 });
 
 const mapDispatchToProps = dispatch => ({

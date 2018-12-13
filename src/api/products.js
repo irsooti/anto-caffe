@@ -28,7 +28,8 @@ export const addDailyCheckout = (cart, uid, displayName, email) =>
     let today = new Date();
     let formatRef =
       today.getDate() + '' + today.getFullYear() + '' + today.getMonth();
-    var ref = database()
+
+    database()
       .ref('checkout/' + formatRef + '/' + uid)
       .push(
         cart
@@ -38,18 +39,9 @@ export const addDailyCheckout = (cart, uid, displayName, email) =>
             c.email = email;
             return c;
           })
-      );
-
-    ref.on(
-      'value',
-      function(snapshot) {
-        let value = snapshot.val();
-        resolve(value);
-      },
-      function(error) {
-        reject(error.code);
-      }
-    );
+      )
+      .then(value => resolve(value))
+      .catch(err => reject(err));
   });
 
 export const addProduct = productName =>

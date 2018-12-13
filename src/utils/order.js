@@ -25,3 +25,26 @@ export function ordersReducer(orders = []) {
     return acc;
   }, {});
 }
+
+export function whoOrderThis(orders = [], descr) {
+  return whoOrderThisReducer(orders.filter(order => order.descr === descr));
+}
+
+function whoOrderThisReducer(orders = []) {
+  if (orders.length === 0) return orders;
+  let reducer = orders.reduce((acc, currentOrder) => {
+    var key = currentOrder['email'];
+    if (!acc[key]) {
+      acc[key] = {
+        quantity: 1,
+        email: key,
+        displayName: currentOrder.displayName
+      };
+    } else {
+      acc[key].quantity = acc[key].quantity + 1;
+    }
+
+    return acc;
+  }, {});
+  return Object.keys(reducer).map(email => reducer[email]);
+}
