@@ -25,16 +25,19 @@ const ExistingProduct = ({
 };
 
 class AddNewProduct extends React.Component {
-  onClick = () => {
-    this.props.onAdd(this.state.value);
-  };
-
-  onChangeHandler = value => {
-    this.setState({ value: value });
-  };
   state = {
     value: ''
   };
+
+  onClick = () => {
+    let { value } = this.state;
+    if (value.length > 3) this.props.onAdd(this.state.value);
+  };
+
+  onChangeHandler = (value = '') => {
+    this.setState({ value: value });
+  };
+
   render() {
     return (
       <div className={CssModule.addProductContainer}>
