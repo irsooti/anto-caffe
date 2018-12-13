@@ -41,6 +41,12 @@
   justify-content: right;
 }
 
+.addProductContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 @media only screen and (max-width: 800px) {
   .quantity {
     flex-grow: 0

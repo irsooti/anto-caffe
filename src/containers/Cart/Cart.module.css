@@ -8,8 +8,9 @@
   /* border: solid 1px #ccc; */
   box-shadow: 1px 1px 20px #ccc;
   position: sticky;
+  top: 80px;
   border-radius: 7px;
-  top: 15px;
+  /* top: 15px; */
   background: #fff;
 }
 

@@ -1,4 +1,4 @@
-import { database } from 'firebase/app';
+import { database, auth } from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
@@ -54,18 +54,19 @@ export const addDailyCheckout = (cart, uid, displayName, email) =>
 
 export const addProduct = productName =>
   new Promise((resolve, reject) => {
-    var ref = database()
-      .ref('products')
-      .push({ descr: productName });
+    auth().onAuthStateChanged(function(user) {
+      var ref = database()
+        .ref('products')
+        .push({ descr: productName, author: user.email });
 
-    ref.on(
-      'value',
-      function(snapshot, b) {
-        console.log(b)
-        resolve(snapshot.key);
-      },
-      function(error) {
-        reject(error.code);
-      }
-    );
+      ref.on(
+        'value',
+        function(snapshot, b) {
+          resolve(snapshot.key);
+        },
+        function(error) {
+          reject(error.code);
+        }
+      );
+    });
   });

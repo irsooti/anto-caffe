@@ -8,6 +8,7 @@ import NotFound from '../NotFound/NotFound';
 import Button from '../../ui/Button/Button';
 import { logout } from '../../store/actions/auth';
 import Toolbar from '../Toolbar/Toolbar';
+import MessageBar from '../../ui/MessageBar/MessageBar';
 class AuthenticatedArea extends Component {
   state = {
     toolbarIsOpen: false
@@ -69,6 +70,11 @@ class AuthenticatedArea extends Component {
     const emailVerifiedFragment = (
       <>
         {navbar}
+
+        <MessageBar status="info">
+          L'ordine deve essere confermato entro e non oltre le 9:30
+        </MessageBar>
+
         <div className={cssModule.layout}>
           <div>
             <Router>
@@ -90,9 +96,11 @@ class AuthenticatedArea extends Component {
           isOpen={this.state.toolbarIsOpen}
         />
         <div className={cssModule.commonArea}>
-          {this.props.emailVerified
-            ? emailVerifiedFragment
-            : emailNotVerifiedFragment}
+          <>
+            {this.props.emailVerified
+              ? emailVerifiedFragment
+              : emailNotVerifiedFragment}
+          </>
         </div>
       </>
     );

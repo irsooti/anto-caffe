@@ -37,19 +37,22 @@ class AddNewProduct extends React.Component {
   };
   render() {
     return (
-      <>
-        <div className={CssModule.description}>
+      <div className={CssModule.addProductContainer}>
+        <div style={{ width: '100%' }} className={CssModule.description}>
           <Input
             block={true}
             onChange={this.onChangeHandler}
             style={{ paddingBottom: '15px', width: '100%' }}
-            placeholder={this.props.placeholder}
+            placeholder="Aggiungi un prodotto se non è presente"
           />
         </div>
-        <div className={CssModule.addProduct}>
+        <div
+          style={{ width: '100%', justifyContent: 'flex-end' }}
+          className={CssModule.addProduct}
+        >
           <Button onClick={this.onClick} text="Aggiungi" />
         </div>
-      </>
+      </div>
     );
   }
 }

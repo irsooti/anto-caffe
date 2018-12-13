@@ -47,6 +47,7 @@ class Order extends Component {
       this.state.checkoutDone &&
       prevProps.lastCheckout !== this.props.lastCheckout
     ) {
+      this.setState({ modal: false });
       this.props.history.push('/dailyorder');
     }
   }
@@ -70,7 +71,10 @@ class Order extends Component {
               onRemove={this.removeFromCart}
             />
           ))}
-          <Product onAdd={this.props.addProductToDatabase} isAddingProduct={true} />
+          <Product
+            onAdd={this.props.addProductToDatabase}
+            isAddingProduct={true}
+          />
         </div>
 
         <div>
@@ -99,7 +103,8 @@ const mapDispatchToProps = dispatch => ({
   removeProductToCart: id => dispatch(removeProductFromCart(id)),
   checkout: (cart, uid, displayName, email) =>
     dispatch(beginCheckoutFlow(cart, uid, displayName, email)),
-  addProductToDatabase: (productName) => dispatch(beginAddProductFlow(productName))
+  addProductToDatabase: productName =>
+    dispatch(beginAddProductFlow(productName))
 });
 
 export default connect(
