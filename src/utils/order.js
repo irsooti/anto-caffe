@@ -1,3 +1,5 @@
+import { normalizeToDashcase } from './data';
+
 export function getOrdersByEmail(orders = [], email) {
   return ordersReducer(orders.filter(order => order.email === email));
 }
@@ -27,7 +29,9 @@ export function ordersReducer(orders = []) {
 }
 
 export function whoOrderThis(orders = [], descr) {
-  return whoOrderThisReducer(orders.filter(order => order.descr === descr));
+  return whoOrderThisReducer(
+    orders.filter(order => normalizeToDashcase(order.descr) === descr)
+  );
 }
 
 function whoOrderThisReducer(orders = []) {
@@ -36,12 +40,12 @@ function whoOrderThisReducer(orders = []) {
     var key = currentOrder['email'];
     if (!acc[key]) {
       acc[key] = {
-        quantity: 1,
-        email: key,
+        quantity: currentOrder.quantity,
+        email: currentOrder.email,
         displayName: currentOrder.displayName
       };
     } else {
-      acc[key].quantity = acc[key].quantity + 1;
+      acc[key].quantity = acc[key].quantity + currentOrder.quantity;
     }
 
     return acc;

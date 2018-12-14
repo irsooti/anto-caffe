@@ -11,9 +11,13 @@ import { HashRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import { ordersReducer, getWhoOrder, whoOrderThis } from '../../utils/order';
 import UserOrder from '../../components/UserOrders/UserOrder';
 import Modal from '../../ui/Modal/Modal';
+import { normalizeToDashcase } from '../../utils/data';
 
 const { REACT_APP_ANTO_TEL } = process.env;
 class CollectiveOrders extends Component {
+  state = {
+    lastProductSelectedName: ''
+  };
   componentDidMount() {
     const { onOrdersChange } = this.props;
 
@@ -48,13 +52,16 @@ class CollectiveOrders extends Component {
               if (totalOrders[orderId].quantity === 0) return null;
               return (
                 <div
-                  onClick={() =>
+                  onClick={() => {
+                    this.setState({
+                      lastProductSelectedName: totalOrders[orderId].descr
+                    });
                     this.props.history.push(
-                      `${this.props.match.path}/product/${
+                      `${this.props.match.path}/product/${normalizeToDashcase(
                         totalOrders[orderId].descr
-                      }`
-                    )
-                  }
+                      )}`
+                    );
+                  }}
                   style={{ cursor: 'pointer' }}
                   className={cssModule.order}
                   key={id}
@@ -101,7 +108,7 @@ class CollectiveOrders extends Component {
                 <Modal visible={true} toggle={this.props.history.goBack}>
                   <div>
                     <div className={cssModule.title}>
-                      <h3>{props.match.params.orderId}</h3>
+                      <h3>{this.state.lastProductSelectedName}</h3>
                     </div>
                     <ul>
                       {whoOrderThis(orders, props.match.params.orderId).map(

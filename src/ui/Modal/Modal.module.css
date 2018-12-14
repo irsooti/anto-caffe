@@ -4,7 +4,7 @@
     padding: 25px;
     border-radius: 7px;
     box-shadow: 1px 1px 30px #CCC;
-    width: 1000px;
+    width: auto;
     max-width: 100%;
     position: relative;
     align-self: flex-start;
