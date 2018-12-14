@@ -17,16 +17,17 @@ export const postVerifyToken = () => {
 
 export const signUp = async (email, pass, nome, cognome) => {
   let user = null;
-  if (!email.endsWith('@aesystech.it') || !email.endsWith('@aesys.tech')) {
-    throw new Error('La mail deve essere aesys!');
+  if (email.endsWith('@aesystech.it') || email.endsWith('@aesys.tech')) {
+    await auth().createUserWithEmailAndPassword(email, pass);
+    user = auth().currentUser;
+    user.sendEmailVerification();
+    user.updateProfile({
+      displayName: nome + ' ' + cognome
+    });
+    return user;
   }
-  await auth().createUserWithEmailAndPassword(email, pass);
-  user = auth().currentUser;
-  user.sendEmailVerification();
-  user.updateProfile({
-    displayName: nome + ' ' + cognome
-  });
-  return user;
+
+  throw new Error('La mail deve essere aesys!');
 };
 
 export const logout = () =>
