@@ -36,12 +36,12 @@ function whoOrderThisReducer(orders = []) {
     var key = currentOrder['email'];
     if (!acc[key]) {
       acc[key] = {
-        quantity: 1,
-        email: key,
+        quantity: currentOrder.quantity,
+        email: currentOrder.email,
         displayName: currentOrder.displayName
       };
     } else {
-      acc[key].quantity = acc[key].quantity + 1;
+      acc[key].quantity = acc[key].quantity + currentOrder.quantity;
     }
 
     return acc;
