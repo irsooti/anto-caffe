@@ -1,3 +1,5 @@
+import { normalizeToDashcase } from './data';
+
 export function getOrdersByEmail(orders = [], email) {
   return ordersReducer(orders.filter(order => order.email === email));
 }
@@ -27,7 +29,9 @@ export function ordersReducer(orders = []) {
 }
 
 export function whoOrderThis(orders = [], descr) {
-  return whoOrderThisReducer(orders.filter(order => order.descr === descr));
+  return whoOrderThisReducer(
+    orders.filter(order => normalizeToDashcase(order.descr) === descr)
+  );
 }
 
 function whoOrderThisReducer(orders = []) {
