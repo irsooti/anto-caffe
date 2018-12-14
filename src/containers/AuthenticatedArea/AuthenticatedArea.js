@@ -66,7 +66,7 @@ class AuthenticatedArea extends Component {
         {navbar}
 
         <MessageBar status="info">
-          L'ordine deve essere confermato entro e non oltre le 9:30
+          L'ordine deve essere confermato entro e non oltre le 9:45
         </MessageBar>
 
         <div className={cssModule.layout}>
