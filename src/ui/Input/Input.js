@@ -31,7 +31,7 @@ export default ({
         type={type}
         placeholder={placeholder}
         className={`${SIZE[size]} `}
-        current-password={currentPassword.toString()}
+        autoComplete={currentPassword ? 'current-password' : ''}
       />
     </div>
   );

@@ -9,6 +9,8 @@ import Button from '../../ui/Button/Button';
 import { logoutFlow } from '../../store/actions/auth';
 import Toolbar from '../Toolbar/Toolbar';
 import MessageBar from '../../ui/MessageBar/MessageBar';
+import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
+import MyOrders from '../MyOrders/MyOrders';
 class AuthenticatedArea extends Component {
   state = {
     toolbarIsOpen: false
@@ -74,6 +76,7 @@ class AuthenticatedArea extends Component {
             <Router>
               <Switch>
                 <Route path="/dailyorder" component={CollectiveOrders} />
+                <Route path="/myorder" component={MyOrders} />
                 <Route path="/order" exact component={Order} />
                 <Route path="/" exact component={Order} />
                 <Route component={NotFound} />
@@ -109,7 +112,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogout: () => dispatch(logoutFlow())
+    onLogout: () => dispatch(logoutFlow()),
+    onOrdersChange: resp => dispatch(retrieveOrdersWithSuccess(resp))
   };
 };
 
