@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  border: dashed 3px;
+  padding: 25px;
+  flex-direction: column;
+  background: #FFF;
+}
+
+.orderName {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.orderCount {
+  display: flex;
+  width: 200px;
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.title {
+  text-align: center;
+  padding: 20px;
+}
+
+.footer {
+  text-align: right;
+  padding-top: 30px
+}
+
+.order {
+  border-bottom: solid 1px;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 15px 10px;
+}
+
+.fullHeightContainer {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  flex-direction: column;
+  align-self: center
+}
