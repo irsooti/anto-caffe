@@ -10,7 +10,7 @@ import NotFound from '../NotFound/NotFound';
 import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
 import { onDailyCheckoutChange } from '../../api/orders';
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     this.props.preAuthenticate();
   }
@@ -30,7 +30,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route path="/register" exact component={Register} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" component={Login} />
             <Route path="/" component={withAuthentication(AuthenticatedArea)} />
             <Route component={NotFound} />
           </Switch>

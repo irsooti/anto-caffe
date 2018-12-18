@@ -1,8 +1,15 @@
 {
-  "short_name": "Prenota colazione",
   "name": "Prenota colazione",
+  "short_name": "Colazione",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "tazzulella.png",
+      "sizes": "138x138",
+      "type": "image/png"
+    }
+  ]
 }

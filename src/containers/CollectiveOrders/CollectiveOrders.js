@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { beginOrdersFlow } from '../../store/actions/orders';
 import cssModule from './CollectiveOrders.module.css';
 import Button from '../../ui/Button/Button';
-import { HashRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import { ordersReducer, getWhoOrder, whoOrderThis } from '../../utils/order';
 import UserOrder from '../../components/UserOrders/UserOrder';
 import Modal from '../../ui/Modal/Modal';
@@ -90,64 +90,62 @@ class CollectiveOrders extends Component {
           </div>
         </div>
 
-        <Router>
-          <Switch>
-            <Route
-              path={`${this.props.match.path}/product/:orderId`}
-              render={props => (
-                <Modal visible={true} toggle={this.props.history.goBack}>
-                  <div>
-                    <div className={cssModule.title}>
-                      <h3>{this.state.lastProductSelectedName}</h3>
-                    </div>
-                    <ul>
-                      {whoOrderThis(orders, props.match.params.orderId).map(
-                        (order, key) => (
-                          <li className={cssModule.order} key={key}>
-                            <span className={cssModule.orderName}>
-                              <span style={{ display: 'block' }}>
-                                {order.displayName}
-                                <br />
-                                <small
-                                  style={{
-                                    display: 'block',
-                                    fontSize: '0.8em'
-                                  }}
-                                >
-                                  {order.email}
-                                </small>
-                              </span>
-                            </span>
-                            <span
-                              style={{ alignSelf: 'center' }}
-                              className={cssModule.orderCount}
-                            >
-                              {order.quantity}
-                            </span>
-                          </li>
-                        )
-                      )}
-                    </ul>
+        <Switch>
+          <Route
+            path={`${this.props.match.path}/product/:orderId`}
+            render={props => (
+              <Modal visible={true} toggle={this.props.history.goBack}>
+                <div>
+                  <div className={cssModule.title}>
+                    <h3>{this.state.lastProductSelectedName}</h3>
                   </div>
-                </Modal>
-              )}
-            />
-            <Route
-              path={`${this.props.match.path}/:email`}
-              render={props => (
-                <div className={cssModule.fullHeightContainer}>
-                  <div className={cssModule.container}>
-                    <UserOrder
-                      orders={orders}
-                      email={props.match.params.email}
-                      cssModule={cssModule}
-                    />
-                  </div>
+                  <ul>
+                    {whoOrderThis(orders, props.match.params.orderId).map(
+                      (order, key) => (
+                        <li className={cssModule.order} key={key}>
+                          <span className={cssModule.orderName}>
+                            <span style={{ display: 'block' }}>
+                              {order.displayName}
+                              <br />
+                              <small
+                                style={{
+                                  display: 'block',
+                                  fontSize: '0.8em'
+                                }}
+                              >
+                                {order.email}
+                              </small>
+                            </span>
+                          </span>
+                          <span
+                            style={{ alignSelf: 'center' }}
+                            className={cssModule.orderCount}
+                          >
+                            {order.quantity}
+                          </span>
+                        </li>
+                      )
+                    )}
+                  </ul>
                 </div>
-              )}
-            />
-          </Switch>
-        </Router>
+              </Modal>
+            )}
+          />
+          <Route
+            path={`${this.props.match.path}/:email`}
+            render={props => (
+              <div className={cssModule.fullHeightContainer}>
+                <div className={cssModule.container}>
+                  <UserOrder
+                    orders={orders}
+                    email={props.match.params.email}
+                    cssModule={cssModule}
+                  />
+                </div>
+              </div>
+            )}
+          />
+        </Switch>
       </div>
     );
   }
