@@ -39,3 +39,7 @@ export const logout = () =>
         resolve(true);
       });
   });
+
+export const resetPassword = email => {
+  return auth().sendPasswordResetEmail(email);
+};

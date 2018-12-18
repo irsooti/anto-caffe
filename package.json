@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "enzyme-adapter-react-16": "^1.7.1",
     "firebase": "^5.6.0",
     "ramda": "^0.26.1",
     "react": "^16.6.3",
@@ -29,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.8.0"
+  }
 }

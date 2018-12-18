@@ -21,9 +21,6 @@
   width: 100%;
 }
 
-.OrderContainer {
-}
-
 @media only screen and (max-width: 800px) {
   .OrderContainer {
     flex-direction: column;

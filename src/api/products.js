@@ -46,19 +46,23 @@ export const addDailyCheckout = (cart, uid, displayName, email) =>
 
 export const addProduct = productName =>
   new Promise((resolve, reject) => {
-    auth().onAuthStateChanged(function(user) {
-      var ref = database()
-        .ref('products')
-        .push({ descr: productName, author: user.email });
+    auth().onAuthStateChanged(
+      function(user) {
+        var ref = database()
+          .ref('products')
+          .push({ descr: productName, author: user.email });
 
-      ref.on(
-        'value',
-        function(snapshot, b) {
-          resolve(snapshot.key);
-        },
-        function(error) {
-          reject(error.code);
-        }
-      );
-    });
+        ref.on(
+          'value',
+          function(snapshot, b) {
+            resolve(snapshot.key);
+          },
+          function(error) {
+            reject(error.code);
+          }
+        );
+      },
+      err => console.error(err),
+      complete => complete()
+    );
   });

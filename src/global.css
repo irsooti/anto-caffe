@@ -243,6 +243,7 @@ a {
   text-align: center;
   box-shadow: 1px 5px 20px #2b2b2b8f;
   position: sticky;
+  z-index: 100;
   top: 0;
 }
 
@@ -254,6 +255,11 @@ a {
 .message-bar__info {
   color: #fff;
   background: var(--default-color);
+}
+
+.message-bar__success {
+  color: #fff;
+  background: var(--success-color);
 }
 
 @keyframes onpress {
