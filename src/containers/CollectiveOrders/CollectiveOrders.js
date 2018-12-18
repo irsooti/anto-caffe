@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  beginOrdersFlow,
-  retrieveOrdersWithSuccess
-} from '../../store/actions/orders';
+import { beginOrdersFlow } from '../../store/actions/orders';
 import cssModule from './CollectiveOrders.module.css';
 import Button from '../../ui/Button/Button';
-import { onDailyCheckoutChange } from '../../api/orders';
 import { Route, NavLink, Switch } from 'react-router-dom';
 import { ordersReducer, getWhoOrder, whoOrderThis } from '../../utils/order';
 import UserOrder from '../../components/UserOrders/UserOrder';
@@ -18,13 +14,7 @@ class CollectiveOrders extends Component {
   state = {
     lastProductSelectedName: ''
   };
-  componentDidMount() {
-    const { onOrdersChange } = this.props;
 
-    onDailyCheckoutChange(resp => {
-      onOrdersChange(resp);
-    });
-  }
   render() {
     const { orders } = this.props;
     const totalOrders = ordersReducer(orders);
@@ -167,8 +157,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrdersLoad: () => dispatch(beginOrdersFlow()),
-    onOrdersChange: resp => dispatch(retrieveOrdersWithSuccess(resp))
+    onOrdersLoad: () => dispatch(beginOrdersFlow())
   };
 };
 

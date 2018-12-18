@@ -4,25 +4,46 @@ import 'firebase/auth';
 
 export const getAllProducts = () =>
   new Promise((resolve, reject) => {
-    var ref = database().ref('products');
-
-    ref.on(
-      'value',
-      function(snapshot) {
-        let value = snapshot.val();
+    database()
+      .ref('products')
+      .once('value')
+      .then(res => {
+        let value = res.val();
         resolve(
           Object.keys(value).map(id => ({
             id,
             ...value[id]
           }))
         );
-      },
-      function(error) {
-        reject(error.code);
-      }
-    );
+      });
+    //
+    // ref.on(
+    //   'value',
+    //   function(snapshot) {
+    //     let value = snapshot.val();
+    //     resolve(
+    //       Object.keys(value).map(id => ({
+    //         id,
+    //         ...value[id]
+    //       }))
+    //     );
+    //   },
+    //   function(error) {
+    //     reject(error.code);
+    //   }
+    // );
   });
-
+/**
+ *
+ * @param {Array} cart
+ * Cart with ordered products
+ * @param {String} uid
+ * User ID
+ * @param {String} displayName
+ * User display name
+ * @param {String} email
+ * User current email
+ */
 export const addDailyCheckout = (cart, uid, displayName, email) =>
   new Promise((resolve, reject) => {
     let today = new Date();

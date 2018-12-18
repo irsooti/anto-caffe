@@ -7,10 +7,21 @@ import Login from '../Login/Login';
 import { beginVerifyToken } from '../../store/actions/auth';
 import AuthenticatedArea from '../AuthenticatedArea/AuthenticatedArea';
 import NotFound from '../NotFound/NotFound';
+import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
+import { onDailyCheckoutChange } from '../../api/orders';
 
 export class App extends Component {
   componentDidMount() {
     this.props.preAuthenticate();
+  }
+
+  componentDidUpdate() {
+    const { onOrdersChange, isAuthenticated } = this.props;
+
+    if (isAuthenticated)
+      onDailyCheckoutChange(resp => {
+        onOrdersChange(resp);
+      });
   }
 
   render() {
@@ -34,7 +45,8 @@ const mapStateToProps = ({ auth }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  preAuthenticate: token => dispatch(beginVerifyToken(token))
+  preAuthenticate: token => dispatch(beginVerifyToken(token)),
+  onOrdersChange: resp => dispatch(retrieveOrdersWithSuccess(resp))
 });
 
 export default connect(

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App/App';
 import { Provider } from 'react-redux';
 import configStore from './store/configStore';
-import { unregister } from './serviceWorker';
+import { register } from './serviceWorker';
 import 'reset-css';
 import './global.css';
 import { initializeApp } from 'firebase/app';
@@ -39,4 +39,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-unregister();
+register();
