@@ -6,7 +6,7 @@
   border: dashed 3px;
   padding: 25px;
   flex-direction: column;
-  background: #FFF;
+  background: #fff;
 }
 
 .orderName {
@@ -19,7 +19,6 @@
 .orderCount {
   display: flex;
   width: 200px;
-  align-self: flex-end;
   justify-content: flex-end;
 }
 
@@ -30,13 +29,26 @@
 
 .footer {
   text-align: right;
-  padding-top: 30px
+  padding-top: 30px;
 }
 
+.deleted {
+  text-decoration: line-through;
+  padding-left: 15px;
+  padding-left: 15px;
+  color: #CCC;  
+}
+
+.orderChanger {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
 .order {
   border-bottom: solid 1px;
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
   padding: 15px 10px;
 }
 
@@ -45,5 +57,5 @@
   width: 100%;
   padding: 15px;
   flex-direction: column;
-  align-self: center
+  align-self: center;
 }

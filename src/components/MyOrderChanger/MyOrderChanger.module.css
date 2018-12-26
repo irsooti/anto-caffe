@@ -1,0 +1,15 @@
+.myOrderChanger {
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+}
+
+.myOrderChanger :global(.fas) {
+  font-size: 1.8em;
+  cursor: pointer;
+}
+
+.notActive {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}

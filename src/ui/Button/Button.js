@@ -6,12 +6,16 @@ export default function Button({
   size = 'lg',
   type,
   disabled = false,
-  icon
+  icon,
+  style
 }) {
-  let iconElement = icon ? <span style={{marginLeft: '10px'}} className={icon} /> : null;
+  let iconElement = icon ? (
+    <span style={{ marginLeft: '10px' }} className={icon} />
+  ) : null;
 
   return type === 'submit' ? (
     <input
+      style={style}
       type="submit"
       value={text}
       className={'btn btn--' + size + (disabled ? ' btn--disabled' : '')}
@@ -19,6 +23,7 @@ export default function Button({
     />
   ) : (
     <button
+      style={style}
       className={'btn btn--' + size + (disabled ? ' btn--disabled' : '')}
       onClick={!disabled ? onClick : null}
     >

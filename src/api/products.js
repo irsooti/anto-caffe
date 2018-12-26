@@ -65,6 +65,27 @@ export const addDailyCheckout = (cart, uid, displayName, email) =>
       .catch(err => reject(err));
   });
 
+/**
+ * @param {Array} cart
+ * Cart with ordered products
+ * @param {String} uid
+ * User ID
+ * @param {String} displayName
+ * User display name
+ * @param {String} email
+ * User current email
+ */
+export const changeDailyCheckout = (cart, uid) =>
+  new Promise(async resolve => {
+    let today = new Date();
+    let formatRef =
+      today.getDate() + '' + today.getFullYear() + '' + today.getMonth();
+    let branch = database().ref('checkout/' + formatRef + '/' + uid);
+    await branch.remove();
+
+    resolve(await branch.push(cart));
+  });
+
 export const addProduct = productName =>
   new Promise(resolve => {
     const user = auth().currentUser;
