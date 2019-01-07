@@ -1,5 +1,6 @@
 .Backdrop {
   backface-visibility: hidden;
+  padding: 10px;
   position: fixed;
   z-index: 999;
   left: 0px;

@@ -237,7 +237,9 @@ a {
   border: dotted 2px;
   border-bottom-style: none;
 }
-
+.gutter {
+  padding: 15px;
+}
 .message-bar {
   padding: 20px 15px;
   text-align: center;

@@ -11,6 +11,7 @@ import Toolbar from '../Toolbar/Toolbar';
 import MessageBar from '../../ui/MessageBar/MessageBar';
 import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
 import MyOrders from '../MyOrders/MyOrders';
+const { REACT_APP_INFO } = process.env;
 class AuthenticatedArea extends Component {
   state = {
     toolbarIsOpen: false
@@ -66,10 +67,7 @@ class AuthenticatedArea extends Component {
     const emailVerifiedFragment = (
       <>
         {navbar}
-
-        <MessageBar status="info">
-          L'ordine deve essere confermato entro e non oltre le 9:45
-        </MessageBar>
+        <MessageBar status="info">{REACT_APP_INFO}</MessageBar>
 
         <div className={cssModule.layout}>
           <div>

@@ -95,7 +95,7 @@ class CollectiveOrders extends Component {
             path={`${this.props.match.path}/product/:orderId`}
             render={props => (
               <Modal visible={true} toggle={this.props.history.goBack}>
-                <div>
+                <div style={{ maxWidth: '100%' }}>
                   <div className={cssModule.title}>
                     <h3>{this.state.lastProductSelectedName}</h3>
                   </div>
