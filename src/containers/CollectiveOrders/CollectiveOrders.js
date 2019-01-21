@@ -97,7 +97,7 @@ class CollectiveOrders extends Component {
 
             <Button
               onClick={() =>
-                (window.location = `https://api.whatsapp.com/send?phone=+39${REACT_APP_ANTO_CELL}&text=${this.encodeTextForWhatsapp()}`)
+                (window.location = `https://api.whatsapp.com/send?phone=39${REACT_APP_ANTO_CELL}&text=${this.encodeTextForWhatsapp()}`)
               }
               icon="fab fa-whatsapp"
               text="Ordina da Whatsapp"
