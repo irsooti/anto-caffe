@@ -29,8 +29,10 @@ class CollectiveOrders extends Component {
           totalOrders[orderId].descr +
           '\n';
 
-      return text = text + '\nTi ringrazio!';
+      return text;
     });
+
+    text = text + '\nTi ringrazio!'
 
     return encodeURI(text);
   };
