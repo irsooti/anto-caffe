@@ -19,7 +19,7 @@ class CollectiveOrders extends Component {
     const { orders, user } = this.props;
     const totalOrders = ordersReducer(orders);
 
-    let text = `Ciao Antonio, sono ${user.displayName} potresti portarci questo?`;
+    let text = `Ciao Antonio, sono ${user.displayName} di Aesys potresti portarci questo?\n`;
     Object.keys(totalOrders).map(orderId => {
       if (totalOrders[orderId].quantity !== 0)
         text =
