@@ -9,10 +9,30 @@ import UserOrder from '../../components/UserOrders/UserOrder';
 import Modal from '../../ui/Modal/Modal';
 import { normalizeToDashcase } from '../../utils/data';
 
-const { REACT_APP_ANTO_TEL } = process.env;
+const { REACT_APP_ANTO_TEL, REACT_APP_ANTO_CELL } = process.env;
 class CollectiveOrders extends Component {
   state = {
     lastProductSelectedName: ''
+  };
+
+  encodeTextForWhatsapp = () => {
+    const { orders } = this.props;
+    const totalOrders = ordersReducer(orders);
+
+    let text = '';
+    Object.keys(totalOrders).map(orderId => {
+      if (totalOrders[orderId].quantity !== 0)
+        text =
+          text +
+          totalOrders[orderId].quantity +
+          ' - ' +
+          totalOrders[orderId].descr +
+          '\n';
+
+      return true;
+    });
+
+    return encodeURI(text);
   };
 
   render() {
@@ -71,6 +91,14 @@ class CollectiveOrders extends Component {
               onClick={() => (window.location = 'tel:' + REACT_APP_ANTO_TEL)}
               icon="fa fa-phone"
               text="Chiama Antonio"
+            />
+
+            <Button
+              onClick={() =>
+                (window.location = `https://api.whatsapp.com/send?phone=+39${REACT_APP_ANTO_CELL}&text=${this.encodeTextForWhatsapp()}`)
+              }
+              icon="fab fa-whatsapp"
+              text="Ordina da Whatsapp"
             />
 
             <hr />
