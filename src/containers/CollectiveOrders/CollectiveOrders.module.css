@@ -1,7 +1,7 @@
 .fullHeightContainer {
   display: flex;
   width: 100%;
-  padding: 15px;
+  padding: 5px;
   flex-direction: column;
   align-self: center
 }

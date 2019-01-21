@@ -7,6 +7,7 @@ import cssModule from './Login.module.css';
 import Button from '../../ui/Button/Button';
 import { Redirect, Link, Route, Switch } from 'react-router-dom';
 import { resetPassword } from '../../api/auth';
+import { ENTRY_POINT } from '../App/App';
 
 class Login extends Component {
   state = {
@@ -153,7 +154,7 @@ class Login extends Component {
           <MessageBar status="danger">{recoveredError}</MessageBar>
         ) : null}
         <div className={cssModule.background}>
-          {this.props.isSuccess ? <Redirect to="/" /> : null}
+          {this.props.isSuccess ? <Redirect to={ENTRY_POINT} /> : null}
           {this.props.isPending ? '' : form}
         </div>
       </>

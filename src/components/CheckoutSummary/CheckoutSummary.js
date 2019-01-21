@@ -5,7 +5,7 @@ import Button from '../../ui/Button/Button';
 
 const CheckoutSummary = ({ cart, onConfirm, errorMsg }) => {
   return (
-    <div className={cssModule.summary}>
+    <div style={{ maxWidth: '100%' }} className={cssModule.summary}>
       <h3 style={{marginBottom:'20px'}}>Riepilogo</h3>
       <hr className="hr" />
       {errorMsg ? (

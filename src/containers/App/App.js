@@ -10,7 +10,13 @@ import NotFound from '../NotFound/NotFound';
 import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
 import { onDailyCheckoutChange } from '../../api/orders';
 
+export const ENTRY_POINT = window.location.hash.replace('#', '');
+
 export class App extends Component {
+  state = {
+    initialized: true
+  };
+
   componentDidMount() {
     this.props.preAuthenticate();
   }

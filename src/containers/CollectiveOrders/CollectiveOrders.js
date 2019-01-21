@@ -19,12 +19,15 @@ class CollectiveOrders extends Component {
     const { orders, user } = this.props;
     const totalOrders = ordersReducer(orders);
 
-    let text = `Ciao Antonio, sono ${user.displayName} di Aesys potresti portarci questo?\n`;
+    let text = `Ciao Antonio, sono ${
+      user.displayName
+    } di Aesys potresti portarci questo?\n`;
     Object.keys(totalOrders).map(orderId => {
       if (totalOrders[orderId].quantity !== 0)
         text =
-          text + 
-          '👉 ' + totalOrders[orderId].quantity +
+          text +
+          '👉 ' +
+          totalOrders[orderId].quantity +
           ' - ' +
           totalOrders[orderId].descr +
           '\n';
@@ -32,7 +35,7 @@ class CollectiveOrders extends Component {
       return text;
     });
 
-    text = text + '\nTi ringrazio!'
+    text = text + '\nTi ringrazio!';
 
     return encodeURI(text);
   };
@@ -164,14 +167,15 @@ class CollectiveOrders extends Component {
           <Route
             path={`${this.props.match.path}/:email`}
             render={props => (
-              <div className={cssModule.fullHeightContainer}>
-                <div className={cssModule.container}>
-                  <UserOrder
-                    orders={orders}
-                    email={props.match.params.email}
-                    cssModule={cssModule}
-                  />
-                </div>
+              <div
+                style={{ marginTop: '15px' }}
+                className={cssModule.container}
+              >
+                <UserOrder
+                  orders={orders}
+                  email={props.match.params.email}
+                  cssModule={cssModule}
+                />
               </div>
             )}
           />
