@@ -16,20 +16,20 @@ class CollectiveOrders extends Component {
   };
 
   encodeTextForWhatsapp = () => {
-    const { orders } = this.props;
+    const { orders, user } = this.props;
     const totalOrders = ordersReducer(orders);
 
-    let text = '';
+    let text = `Ciao Antonio, sono ${user.displayName} potresti portarci questo?`;
     Object.keys(totalOrders).map(orderId => {
       if (totalOrders[orderId].quantity !== 0)
         text =
-          text +
-          totalOrders[orderId].quantity +
+          text + 
+          '👉 ' + totalOrders[orderId].quantity +
           ' - ' +
           totalOrders[orderId].descr +
           '\n';
 
-      return true;
+      return text = text + '\nTi ringrazio!';
     });
 
     return encodeURI(text);
@@ -180,7 +180,8 @@ class CollectiveOrders extends Component {
 }
 
 const mapStateToProps = state => ({
-  orders: state.orders.orderList
+  orders: state.orders.orderList,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => {
