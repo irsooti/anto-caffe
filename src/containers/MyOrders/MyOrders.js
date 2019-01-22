@@ -22,6 +22,13 @@ class MyOrders extends Component {
     }
   };
 
+  componentDidMount() {
+    if (this.props.orders.length > 0) {
+      const orders = { ...ordersReducer(this.props.orders) };
+      this.setState({ orders: clone(orders), isEditable: true });
+    }
+  }
+
   addQuantityHandler = productId => {
     let orders = { ...this.state.orders };
     return () => {
