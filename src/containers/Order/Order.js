@@ -12,16 +12,24 @@ import {
   beginCheckoutFlow,
   beginAddProductFlow
 } from '../../store/actions/products';
+import Input from '../../ui/Input/Input';
 
 class Order extends Component {
   state = {
     modal: false,
     checkoutDone: false,
+    filter: '',
     total: {}
   };
 
   addToCart = id => () => {
     this.props.addProductToCart(id);
+  };
+
+  filteredProductsByDescription = () => {
+    return this.props.products.filter(product =>
+      product.descr.includes(this.state.filter)
+    );
   };
 
   removeFromCart = id => () => {
@@ -61,7 +69,10 @@ class Order extends Component {
     return (
       <div className={cssModule.OrderContainer}>
         <div className={'container column ' + cssModule.order}>
-          {products.map(product => (
+          <div className={cssModule.productFilter}>
+            <Input style={{paddingBottom: '15px'}} label="Filtra per nome: " onChange={value => this.setState({ filter: value })} />
+          </div>
+          {this.filteredProductsByDescription().map(product => (
             <Product
               key={product.id}
               id={product.id}

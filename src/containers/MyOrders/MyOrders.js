@@ -4,19 +4,23 @@ import { ordersReducer } from '../../utils/order';
 import cssModule from './MyOrders.module.css';
 import MyOrderChanger from '../../components/MyOrderChanger/MyOrderChanger';
 import Button from '../../ui/Button/Button';
-import { equals } from 'ramda';
+import { equals, clone } from 'ramda';
 import { changeDailyCheckout } from '../../api/products';
 import MessageBar from '../../ui/MessageBar/MessageBar';
 class MyOrders extends Component {
-  constructor(props) {
-    super(props);
-    const orders = { ...ordersReducer(props.orders) };
-    this.state = {
-      orders: { ...orders },
-      errorMessage: null,
-      successMessage: null
-    };
-  }
+  state = {
+    orders: {},
+    isEditable: false,
+    errorMessage: null,
+    successMessage: null
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.orders.length < this.props.orders.length) {
+      const orders = { ...ordersReducer(this.props.orders) };
+      this.setState({ orders: clone(orders), isEditable: true });
+    }
+  };
 
   addQuantityHandler = productId => {
     let orders = { ...this.state.orders };
@@ -87,32 +91,41 @@ class MyOrders extends Component {
               </MessageBar>
             )}
           </div>
-          {Object.keys(totalOrders).map((orderId, id) => {
-            let descriptionClasses = [cssModule.orderName];
+          {Object.keys(totalOrders).length > 0 ? (
+            Object.keys(totalOrders).map((orderId, id) => {
+              let descriptionClasses = [cssModule.orderName];
 
-            if (totalOrders[orderId].quantity === 0)
-              descriptionClasses.push(cssModule.deleted);
-            return (
-              <div className={cssModule.order} key={id}>
-                <span className={descriptionClasses.join(' ')}>
-                  {totalOrders[orderId].descr}
-                </span>
-                <span className={cssModule.orderCount}>
-                  <MyOrderChanger
-                    onAdd={this.addQuantityHandler(orderId)}
-                    onRemove={this.removeQuantityHandler(orderId)}
-                    quantity={totalOrders[orderId].quantity}
-                  >
-                    {totalOrders[orderId].quantity}
-                  </MyOrderChanger>
-                </span>
-              </div>
-            );
-          })}
+              if (totalOrders[orderId].quantity === 0)
+                descriptionClasses.push(cssModule.deleted);
+              return (
+                <div className={cssModule.order} key={id}>
+                  <span className={descriptionClasses.join(' ')}>
+                    {totalOrders[orderId].descr}
+                  </span>
+                  <span className={cssModule.orderCount}>
+                    <MyOrderChanger
+                      onAdd={this.addQuantityHandler(orderId)}
+                      onRemove={this.removeQuantityHandler(orderId)}
+                      quantity={totalOrders[orderId].quantity}
+                    >
+                      {totalOrders[orderId].quantity}
+                    </MyOrderChanger>
+                  </span>
+                </div>
+              );
+            })
+          ) : (
+            <div className={cssModule.order}>
+              <span className={cssModule.orderName}>
+                Nessun ordine trovato{' '}
+                {this.state.isEditable ? null : '(ma sto ancora verificando)'}.
+              </span>
+            </div>
+          )}
           <div style={{ textAlign: 'right', marginTop: '20px' }}>
             <Button
               onClick={this.modifyOrderHandler}
-              disabled={this.ordersAreDifferent()}
+              disabled={this.ordersAreDifferent() || !this.state.isEditable}
               text="Modifica ordine"
             />
           </div>
