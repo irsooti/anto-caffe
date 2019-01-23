@@ -28,7 +28,7 @@ class Order extends Component {
 
   filteredProductsByDescription = () => {
     return this.props.products.filter(product =>
-      product.descr.includes(this.state.filter)
+      product.descr.toLowerCase().includes(this.state.filter.toLowerCase())
     );
   };
 
