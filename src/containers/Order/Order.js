@@ -12,7 +12,7 @@ import {
   beginCheckoutFlow,
   beginAddProductFlow
 } from '../../store/actions/products';
-import Input from '../../ui/Input/Input';
+import ProductFilter from '../../components/ProductFilter/ProductFilter';
 
 class Order extends Component {
   state = {
@@ -64,14 +64,23 @@ class Order extends Component {
     this.props.getProducts();
   }
 
+  filterHandler = value => {
+    this.setState({ filter: value });
+  };
+
   render() {
     const { products } = this.props;
     return (
       <div className={cssModule.OrderContainer}>
         <div className={'container column ' + cssModule.order}>
-          <div className={cssModule.productFilter}>
-            <Input style={{paddingBottom: '15px'}} label="Filtra per nome: " onChange={value => this.setState({ filter: value })} />
-          </div>
+          <ProductFilter onChange={this.filterHandler} />
+          {/* <div className={cssModule.productFilter}>
+            <Input
+              style={{ paddingBottom: '15px' }}
+              label="Filtra per nome: "
+              onChange={value => this.setState({ filter: value })}
+            />
+          </div> */}
           {this.filteredProductsByDescription().map(product => (
             <Product
               key={product.id}

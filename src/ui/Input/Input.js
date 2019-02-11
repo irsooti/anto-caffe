@@ -8,6 +8,7 @@ const SIZE = {
 };
 
 export default ({
+  className,
   type = 'text',
   block = false,
   style = {},
@@ -23,7 +24,7 @@ export default ({
   };
 
   return (
-    <div style={style} className={`input ${block ? 'block' : ''}`}>
+    <div style={style} className={`input ${block ? 'block' : ''} ${className}`}>
       {label ? <label className={'label '}>{label}</label> : null}
       <input
         required={required}
