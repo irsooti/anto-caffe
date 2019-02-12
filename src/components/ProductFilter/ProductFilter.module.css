@@ -30,4 +30,5 @@
   background: var(--default-color);
   box-sizing: border-box;
   color: #fff;
+  justify-content: center;
 }

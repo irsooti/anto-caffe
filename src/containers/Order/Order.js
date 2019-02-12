@@ -68,19 +68,20 @@ class Order extends Component {
     this.setState({ filter: value });
   };
 
+  clearFilter = () => {
+    this.filterHandler('');
+  };
+
   render() {
     const { products } = this.props;
     return (
       <div className={cssModule.OrderContainer}>
         <div className={'container column ' + cssModule.order}>
-          <ProductFilter onChange={this.filterHandler} />
-          {/* <div className={cssModule.productFilter}>
-            <Input
-              style={{ paddingBottom: '15px' }}
-              label="Filtra per nome: "
-              onChange={value => this.setState({ filter: value })}
-            />
-          </div> */}
+          <ProductFilter
+            value={this.state.filter}
+            clearFilter={this.clearFilter}
+            onChange={this.filterHandler}
+          />
           {this.filteredProductsByDescription().map(product => (
             <Product
               key={product.id}
