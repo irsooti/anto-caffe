@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import avatarImg from '../../assets/avatar.svg';
 import { connect } from 'react-redux';
 import cssModule from './Profile.module.css';
@@ -13,8 +13,9 @@ import { updateUserProfile } from '../../store/actions/auth';
 
 const Profile = props => {
   const { user } = props;
-  const [displayName, setDisplayName] = useState('');
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [displayName, setDisplayName] = useState(user.displayName);
+  const [avatarUrl, setAvatarUrl] = useState(user.photoURL);
+  const [updated, setUpdatedStatus] = useState(null);
 
   const fileInput = useRef();
   let reader;
@@ -38,15 +39,44 @@ const Profile = props => {
     if (evt.target.files.length > 0) reader.readAsDataURL(evt.target.files[0]);
   };
 
+  const successFrag = (
+    <span style={{ color: 'var(--success-color)' }}>
+      Profilo aggiornato con successo! <i className="far fa-check-circle" />
+    </span>
+  );
+  const errorFrag = (
+    <span style={{ color: 'var(--error-color)' }}>
+      Profilo non aggiornato! <i className="far fa-times-circle" />
+    </span>
+  );
+
+  const conditionalFrag = {
+    true: successFrag,
+    false: errorFrag,
+    null: null
+  };
+
   const updateUserProfileHandler = async () => {
     const id = user.uid;
+    let photoUrl;
     try {
-      const photoUrl = uploadAvatarAndRetrieveUrl(id, avatarUrl);
+      if (fileInput.current.files.length !== 0) {
+        photoUrl = await uploadAvatarAndRetrieveUrl(
+          id,
+          fileInput.current.files[0]
+        );
+      }
+
+      if (!photoUrl) photoUrl = user.photoURL;
+
       apiUpdateProfile(displayName, photoUrl).then(resp => {
+        setUpdatedStatus(true);
         props.updateUserProfile(displayName, photoUrl);
       });
       setAvatarUrl(photoUrl);
-    } catch (err) {}
+    } catch (err) {
+      setUpdatedStatus(false);
+    }
   };
 
   return (
@@ -70,11 +100,11 @@ const Profile = props => {
                 block={true}
                 label="Username"
                 onChange={displayNameHandler}
-                value={displayName ? displayName : user.displayName}
+                value={displayName}
               />
             </div>
             <div className="text-right pt-3">
-              <span>azz</span>
+              {conditionalFrag[updated]}
               <Button text="Salva" onClick={updateUserProfileHandler} type="" />
             </div>
           </div>
@@ -96,7 +126,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateUserProfile: (displayName, photoUrl) =>
-    updateUserProfile(displayName, photoUrl)
+    dispatch(updateUserProfile(displayName, photoUrl))
 });
 
 export default connect(
