@@ -30,6 +30,7 @@ export function* authenticationWorker(action) {
           response.user.email,
           response.user.displayName,
           response.user.uid,
+          response.user.photoURL,
           response.user.emailVerified
         )
       );
@@ -74,7 +75,6 @@ export function* signupWorker(action) {
       )
     );
   } catch (err) {
-    console.log(err);
     yield put(auth.signupFail(err.message));
   } finally {
     yield put(auth.setSignupStatus(false));
@@ -86,7 +86,6 @@ export function* verifyTokenWorker(action) {
 
   try {
     let response = yield call(postVerifyToken);
-
     if (
       response.email.endsWith('@aesystech.it') ||
       response.email.endsWith('@aesys.tech')
@@ -96,6 +95,7 @@ export function* verifyTokenWorker(action) {
           response.email,
           response.displayName,
           response.uid,
+          response.photoURL,
           response.emailVerified
         )
       );
@@ -103,7 +103,7 @@ export function* verifyTokenWorker(action) {
       yield put(auth.logoutFlow());
       throw new Error('Abbiamo disabilitato gli account non Aesys!');
     }
-
+    console.log(response);
     yield put(auth.tokenVerifiedSuccess(response));
   } catch (err) {
     yield put(auth.tokenVerifiedFailure());

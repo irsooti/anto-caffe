@@ -67,12 +67,22 @@ export const authenticationSuccess = (
   email,
   displayName,
   uid,
+  photoURL,
   emailVerified
 ) => {
   return {
     type: actionTypes.AUTHENTICATION_SUCCESS,
     payload: {
-      user: { email, displayName, uid, emailVerified }
+      user: { email, displayName, uid, photoURL, emailVerified }
+    }
+  };
+};
+
+export const updateUserProfile = (displayName, photoURL) => {
+  return {
+    type: actionTypes.UPDATE_USER_PROFILE,
+    payload: {
+      user: { displayName, photoURL }
     }
   };
 };

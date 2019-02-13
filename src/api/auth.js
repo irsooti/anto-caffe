@@ -1,5 +1,6 @@
-import { auth } from 'firebase/app';
+import { auth, storage } from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/storage';
 
 export const postAuthentication = (email, pass) => {
   return auth().signInAndRetrieveDataWithEmailAndPassword(email, pass);
@@ -8,6 +9,7 @@ export const postVerifyToken = () => {
   return new Promise((resolve, reject) => {
     auth().onAuthStateChanged(function(user) {
       if (user) {
+        console.log(user)
         // User is signed in.
         resolve(user);
       }
@@ -15,14 +17,33 @@ export const postVerifyToken = () => {
   });
 };
 
-export const signUp = async (email, pass, nome, cognome) => {
+export const updateProfile = async (displayName, avatarUrl) => {
+  const user = auth().currentUser;
+  return await user.updateProfile({
+    displayName: displayName,
+    photoURL: avatarUrl
+  });
+};
+
+export const uploadAvatarAndRetrieveUrl = (idUser, file) =>
+  new Promise(resolve => {
+    const uploadFile = storage().ref(idUser);
+    uploadFile
+      .put(file)
+      .then(async snapshot => {
+        resolve(await uploadFile.getDownloadURL());
+      })
+      .catch(onreject => onreject);
+  });
+
+export const signUp = async (email, pass, name, surname) => {
   let user = null;
   if (email.endsWith('@aesystech.it') || email.endsWith('@aesys.tech')) {
     await auth().createUserWithEmailAndPassword(email, pass);
     user = auth().currentUser;
     user.sendEmailVerification();
     user.updateProfile({
-      displayName: nome + ' ' + cognome
+      displayName: name + ' ' + surname
     });
     return user;
   }

@@ -68,8 +68,26 @@ a {
   color: var(--default-color);
   text-decoration: none;
 }
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
 .column {
   flex-direction: column;
+}
+
+.column.full {
+  width: 100%;
+  max-width: 100%;
 }
 
 .full-height {
@@ -80,6 +98,10 @@ a {
 
 .toolbarOpen {
   overflow: hidden;
+}
+
+.pt-3 {
+  margin-top: 3rem;
 }
 
 .modalOpen {
@@ -161,6 +183,9 @@ a {
   border: solid 1px;
 }
 
+.input.block {
+  text-align: left;
+}
 .input.block input {
   width: 100%;
 }

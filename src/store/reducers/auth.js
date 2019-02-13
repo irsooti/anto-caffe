@@ -30,6 +30,15 @@ const reducer = (state = initialState, action) => {
         signinError: null,
         signupError: null
       });
+
+    case actionTypes.UPDATE_USER_PROFILE:
+      return updateState(state, {
+        isAuthenticated: true,
+        user: {
+          ...state.user,
+          ...action.payload.user
+        }
+      });
     case actionTypes.SIGN_UP_FAILURE:
       return updateState(state, {
         isAuthenticated: false,

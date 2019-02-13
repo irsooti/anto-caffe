@@ -11,6 +11,7 @@ import Toolbar from '../Toolbar/Toolbar';
 import MessageBar from '../../ui/MessageBar/MessageBar';
 import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
 import MyOrders from '../MyOrders/MyOrders';
+import Profile from '../Profile/Profile';
 const { REACT_APP_INFO } = process.env;
 class AuthenticatedArea extends Component {
   state = {
@@ -75,6 +76,7 @@ class AuthenticatedArea extends Component {
               <Switch>
                 <Route path="/dailyorder" component={CollectiveOrders} />
                 <Route path="/myorder" component={MyOrders} />
+                <Route path="/profile" component={Profile} />
                 <Route path="/order" exact component={Order} />
                 <Route path="/" exact component={Order} />
                 <Route component={NotFound} />

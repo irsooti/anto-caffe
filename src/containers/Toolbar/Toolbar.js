@@ -39,6 +39,14 @@ export default class Toolbar extends Component {
               >
                 Ordina
               </NavLink>
+              <NavLink
+                onClick={onToggle}
+                className={cssModule.navItem}
+                exact
+                to="/profile"
+              >
+                Profilo
+              </NavLink>
 
               <NavLink
                 onClick={onToggle}
