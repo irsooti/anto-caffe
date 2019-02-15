@@ -38,8 +38,6 @@ export function* authenticationWorker(action) {
       yield put(auth.logoutFlow());
       throw new Error('Abbiamo disabilitato gli account non Aesys!');
     }
-
-    console.log(response);
   } catch (err) {
     yield put(auth.authenticationFail(err.message));
     yield localStorage.removeItem('refreshToken');
@@ -103,7 +101,7 @@ export function* verifyTokenWorker(action) {
       yield put(auth.logoutFlow());
       throw new Error('Abbiamo disabilitato gli account non Aesys!');
     }
-    console.log(response);
+
     yield put(auth.tokenVerifiedSuccess(response));
   } catch (err) {
     yield put(auth.tokenVerifiedFailure());
@@ -114,8 +112,7 @@ export function* verifyTokenWorker(action) {
 
 export function* logoutWorker() {
   try {
-    let response = yield call(logout);
-    console.log(response);
+    yield call(logout);
   } catch (err) {
     console.error(err);
   }

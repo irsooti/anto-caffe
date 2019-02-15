@@ -56,7 +56,7 @@
 .toolbarIsOpen + div {
   left: 300px;
   overflow: hidden;
-  transition: 1 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .nav {

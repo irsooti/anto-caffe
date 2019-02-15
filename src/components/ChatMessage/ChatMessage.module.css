@@ -2,49 +2,98 @@
   display: flex;
   align-content: center;
   margin: 15px;
+  flex-direction: row-reverse
+}
+
+.myUser.chatMessage {
+  flex-direction: row;
 }
 
 .text {
   width: 100%;
-  text-align: right;
+  text-align: left;
   margin: 5px;
 }
 
-.text div:after {
+.myUser .text {
+  text-align: right;
+}
+
+.text .message:after {
   content: '';
   border: solid 7px transparent;
-  border-left: solid 15px #fff;
+  border-right: solid 15px #FFF;
   position: absolute;
-  right: -17px;
+  left: -17px;
   top: 10px;
-  transform: rotate(-10deg);
+  transform: rotate(10deg);
   width: auto;
 }
 
-.text div {
+.text .message {
   display: inline-block;
   background: #fff;
   padding: 15px 15px;
-  margin-right: 10px;
   border-radius: 7px;
   line-height: 1.4;
   position: relative;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.226);
 }
 
-.name {
-    display: block;
-    font-size: 12px;
-    margin-right: 12px;
+.text .message {
+  margin-left: 10px;
+  background: #FFF;
 }
 
-.text .currentUser {
+.myUser .text .message {
+  margin-left: inherit;
+  margin-right: 10px;
+  background: #69d38e;
+  position: relative;
+}
+
+.myUser .text {
+  text-align: right;
+}
+
+.name {
+  display: block;
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+.myUser .name {
+  margin-left: inherit;
+  margin-right: 12px;
+}
+
+.myUser .text .message {
   background: #69d38e;
 }
 
-.text .currentUser:after {
+.myUser .text .message:after {
   border-left: solid 15px #69d38e;
+  border-right: inherit;
+  right: -12px;
+  left: inherit;
+  transform: rotate(-10deg);
+  
 }
+
 .avatar {
   border-radius: 50%;
+  flex-shrink: 0;
 }
+
+/* .myUser .currentUser {
+  margin-right: inherit;
+  margin-left: 10px;
+}
+
+.myUser .currentUser:after {
+  border-left: inherit;
+  border-right: solid 15px #69d38e;
+  right: inherit;
+  left: -112px;
+  transform: rotate(10deg);
+} */

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { onChatEnter } from '../../api/chat';
+import cssModule from './ChatScreen.module.css';
 import ChatMessage from '../ChatMessage/ChatMessage';
 
 const ChatScreen = ({ currentUserId }) => {
@@ -11,18 +12,22 @@ const ChatScreen = ({ currentUserId }) => {
     });
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }, 100);
-  }, [messages]);
+  useEffect(
+    () => {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }, 100);
+    },
+    [messages]
+  );
 
   return (
-    <div className="column full" style={{ paddingBottom: '100px', paddingTop: '80px' }}>
+    <div className="column full" style={{ paddingBottom: '100px' }}>
+      <div className={cssModule.pattern} />
       {messages.map(message => (
         <ChatMessage
           isCurrentUser={currentUserId === message.uid}
