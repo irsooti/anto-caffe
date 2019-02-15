@@ -9,7 +9,6 @@ export const postVerifyToken = () => {
   return new Promise((resolve, reject) => {
     auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log(user);
         // User is signed in.
         resolve(user);
       }
@@ -19,7 +18,6 @@ export const postVerifyToken = () => {
 
 export const updateProfile = async (displayName, avatarUrl) => {
   const user = auth().currentUser;
-  console.log(avatarUrl)
   avatarUrl = avatarUrl || user.photoURL;
 
   return await user.updateProfile({

@@ -26,6 +26,7 @@ const Profile = props => {
 
   const displayNameHandler = value => {
     setDisplayName(value);
+    setUpdatedStatus(null)
   };
 
   const handleFileRead = e => {
@@ -68,6 +69,8 @@ const Profile = props => {
       }
 
       if (!photoUrl) photoUrl = user.photoURL;
+
+      if (displayName.trim().length === 0) return;
 
       apiUpdateProfile(displayName, photoUrl).then(resp => {
         setUpdatedStatus(true);

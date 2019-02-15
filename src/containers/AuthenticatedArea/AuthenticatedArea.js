@@ -12,6 +12,7 @@ import MessageBar from '../../ui/MessageBar/MessageBar';
 import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
 import MyOrders from '../MyOrders/MyOrders';
 import Profile from '../Profile/Profile';
+import Chat from '../Chat/Chat';
 const { REACT_APP_INFO } = process.env;
 class AuthenticatedArea extends Component {
   state = {
@@ -78,6 +79,7 @@ class AuthenticatedArea extends Component {
                 <Route path="/myorder" component={MyOrders} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/order" exact component={Order} />
+                <Route path="/chat" exact component={Chat} />
                 <Route path="/" exact component={Order} />
                 <Route component={NotFound} />
               </Switch>

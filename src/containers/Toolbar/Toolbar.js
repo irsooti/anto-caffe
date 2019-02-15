@@ -56,6 +56,14 @@ export default class Toolbar extends Component {
               >
                 I Miei ordini
               </NavLink>
+              <NavLink
+                onClick={onToggle}
+                className={cssModule.navItem}
+                exact
+                to="/chat"
+              >
+                Chat
+              </NavLink>
             </nav>
           </div>
           <div className={cssModule.footer}>
