@@ -29,3 +29,9 @@ export const onChatEnter = onListen => {
       }
     });
 };
+
+export const onChatLeft = () => {
+  return database()
+    .ref('chat/' + getTodayPath())
+    .off('value');
+};

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { onChatEnter } from '../../api/chat';
+import { onChatEnter, onChatLeft } from '../../api/chat';
 import cssModule from './ChatScreen.module.css';
 import ChatMessage from '../ChatMessage/ChatMessage';
 
@@ -7,9 +7,14 @@ const ChatScreen = ({ currentUserId }) => {
   const [messages, updateMessages] = useState([]);
 
   useEffect(() => {
+    console.log('[Chat start]');
     onChatEnter(remoteMessages => {
       updateMessages(remoteMessages);
     });
+    return () => {
+      console.log('[Chat left]');
+      onChatLeft();
+    };
   }, []);
 
   useEffect(
