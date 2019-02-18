@@ -100,6 +100,7 @@ const Profile = props => {
                 onClick={uploadClickHandler}
                 style={{
                   backgroundSize: 'contain',
+                  backgroundPosition: 'center',
                   backgroundImage: `url(${avatarUrl ? avatarUrl : avatarImg})`
                 }}
               />
