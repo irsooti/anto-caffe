@@ -80,6 +80,7 @@ export const changeDailyCheckout = (cart, uid) =>
     let today = new Date();
     let formatRef =
       today.getDate() + '' + today.getFullYear() + '' + today.getMonth();
+
     let branch = database().ref('checkout/' + formatRef + '/' + uid);
     await branch.remove();
 

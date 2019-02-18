@@ -7,6 +7,7 @@ import Button from '../../ui/Button/Button';
 import { equals, clone } from 'ramda';
 import { changeDailyCheckout } from '../../api/products';
 import MessageBar from '../../ui/MessageBar/MessageBar';
+import AuthenticatedContext from '../AuthenticatedArea/AuthenticatedContext';
 class MyOrders extends Component {
   state = {
     orders: {},
@@ -83,61 +84,70 @@ class MyOrders extends Component {
   render() {
     const totalOrders = this.state.orders;
     return (
-      <div className={cssModule.fullHeightContainer}>
-        <div className={cssModule.container}>
-          <div className={cssModule.title}>
-            <h3>Riepilogo dei miei ordini</h3>
-          </div>
-          <div>
-            {this.state.errorMessage && (
-              <MessageBar status="danger">{this.state.errorMessage}</MessageBar>
-            )}
-            {this.state.successMessage && (
-              <MessageBar status="success">
-                {this.state.successMessage}
-              </MessageBar>
-            )}
-          </div>
-          {Object.keys(totalOrders).length > 0 ? (
-            Object.keys(totalOrders).map((orderId, id) => {
-              let descriptionClasses = [cssModule.orderName];
+      <AuthenticatedContext.Consumer>
+        {orderer => (
+          <div className={cssModule.fullHeightContainer}>
+            <div className={cssModule.container}>
+              <div className={cssModule.title}>
+                <h3>Riepilogo dei miei ordini</h3>
+              </div>
+              <div>
+                {this.state.errorMessage && (
+                  <MessageBar status="danger">
+                    {this.state.errorMessage}
+                  </MessageBar>
+                )}
+                {this.state.successMessage && (
+                  <MessageBar status="success">
+                    {this.state.successMessage}
+                  </MessageBar>
+                )}
+              </div>
+              {Object.keys(totalOrders).length > 0 ? (
+                Object.keys(totalOrders).map((orderId, id) => {
+                  let descriptionClasses = [cssModule.orderName];
 
-              if (totalOrders[orderId].quantity === 0)
-                descriptionClasses.push(cssModule.deleted);
-              return (
-                <div className={cssModule.order} key={id}>
-                  <span className={descriptionClasses.join(' ')}>
-                    {totalOrders[orderId].descr}
-                  </span>
-                  <span className={cssModule.orderCount}>
-                    <MyOrderChanger
-                      onAdd={this.addQuantityHandler(orderId)}
-                      onRemove={this.removeQuantityHandler(orderId)}
-                      quantity={totalOrders[orderId].quantity}
-                    >
-                      {totalOrders[orderId].quantity}
-                    </MyOrderChanger>
+                  if (totalOrders[orderId].quantity === 0)
+                    descriptionClasses.push(cssModule.deleted);
+                  return (
+                    <div className={cssModule.order} key={id}>
+                      <span className={descriptionClasses.join(' ')}>
+                        {totalOrders[orderId].descr}
+                      </span>
+                      <span className={cssModule.orderCount}>
+                        <MyOrderChanger
+                          onAdd={this.addQuantityHandler(orderId)}
+                          onRemove={this.removeQuantityHandler(orderId)}
+                          quantity={totalOrders[orderId].quantity}
+                        >
+                          {totalOrders[orderId].quantity}
+                        </MyOrderChanger>
+                      </span>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className={cssModule.order}>
+                  <span className={cssModule.orderName}>
+                    Nessun ordine trovato {this.state.isEditable ? null : ''}.
                   </span>
                 </div>
-              );
-            })
-          ) : (
-            <div className={cssModule.order}>
-              <span className={cssModule.orderName}>
-                Nessun ordine trovato{' '}
-                {this.state.isEditable ? null : '(ma sto ancora verificando)'}.
-              </span>
+              )}
+              <div style={{ textAlign: 'right', marginTop: '20px' }}>
+                <Button
+                  onClick={this.modifyOrderHandler}
+                  disabled={
+                    this.ordersAreDifferent() ||
+                    !this.state.isEditable ||
+                    orderer !== null
+                  }
+                  text="Modifica ordine"
+                />
+              </div>
             </div>
-          )}
-          <div style={{ textAlign: 'right', marginTop: '20px' }}>
-            <Button
-              onClick={this.modifyOrderHandler}
-              disabled={this.ordersAreDifferent() || !this.state.isEditable}
-              text="Modifica ordine"
-            />
           </div>
-        </div>
-      </div>
+        )}
+      </AuthenticatedContext.Consumer>
     );
   }
 }

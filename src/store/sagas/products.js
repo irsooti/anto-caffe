@@ -5,6 +5,7 @@ import {
   addDailyCheckout,
   addProduct
 } from '../../api/products';
+import { isDailyOrderLocked } from '../../api/orders';
 
 export function* retrievePostsWorker(action) {
   yield put(products.getProductsStatus(true));
@@ -30,7 +31,9 @@ export function* checkoutWorker(action) {
       action.payload.email
     );
 
-    console.log(response)
+    const isLocked = yield call(isDailyOrderLocked);
+    if (isLocked)
+      throw new Error('Le ordinazioni di oggi sono bloccate!')
 
     yield put(products.checkoutSuccess(response));
   } catch (err) {

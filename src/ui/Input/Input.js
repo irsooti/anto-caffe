@@ -8,6 +8,7 @@ const SIZE = {
 };
 
 export default ({
+  onKeyPress,
   value,
   className,
   type = 'text',
@@ -28,6 +29,7 @@ export default ({
     <div style={style} className={`input ${block ? 'block' : ''} ${className}`}>
       {label ? <label className={'label '}>{label}</label> : null}
       <input
+        onKeyPress={onKeyPress}
         value={value}
         required={required}
         onChange={change}

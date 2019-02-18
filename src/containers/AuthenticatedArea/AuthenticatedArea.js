@@ -13,17 +13,33 @@ import { retrieveOrdersWithSuccess } from '../../store/actions/orders';
 import MyOrders from '../MyOrders/MyOrders';
 import Profile from '../Profile/Profile';
 import Chat from '../Chat/Chat';
+import { onLockDailyChange } from '../../api/orders';
+import AuthenticatedContext from './AuthenticatedContext';
 const { REACT_APP_INFO } = process.env;
+
+const getOrderHHSS = isoDate => {
+  let date = new Date(isoDate);
+  return `${date.getHours()}:${date.getMinutes()}`;
+};
+
 class AuthenticatedArea extends Component {
   state = {
-    toolbarIsOpen: false
+    toolbarIsOpen: false,
+    orderer: null
   };
 
   toggleToolbar = () => {
     this.setState(state => ({ toolbarIsOpen: !state.toolbarIsOpen }));
   };
 
+  componentDidMount = () => {
+    onLockDailyChange(resp => {
+      this.setState({ orderer: resp });
+    });
+  };
+
   render() {
+    const { orderer } = this.state;
     const navbar = (
       <nav className="nav default">
         <div className="nav--left">
@@ -67,9 +83,16 @@ class AuthenticatedArea extends Component {
     );
 
     const emailVerifiedFragment = (
-      <>
+      <AuthenticatedContext.Provider value={orderer}>
         {navbar}
-        <MessageBar status="info">{REACT_APP_INFO}</MessageBar>
+        {orderer ? (
+          <MessageBar status="success">
+            Colazione già ordinata da {orderer.displayName} ({orderer.email}) alle{' '}
+            {getOrderHHSS(orderer.timestamp)}{' '}
+          </MessageBar>
+        ) : (
+          <MessageBar status="info">{REACT_APP_INFO}</MessageBar>
+        )}
 
         <div className={cssModule.layout}>
           <div>
@@ -86,7 +109,7 @@ class AuthenticatedArea extends Component {
             </Router>
           </div>
         </div>
-      </>
+      </AuthenticatedContext.Provider>
     );
     return (
       <>

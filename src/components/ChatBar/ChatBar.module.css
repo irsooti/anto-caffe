@@ -33,3 +33,7 @@
   color: var(--default-color);
   background: none;
 }
+
+.chatButton:focus {
+    outline: none;
+}

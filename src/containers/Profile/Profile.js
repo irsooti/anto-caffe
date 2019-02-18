@@ -26,7 +26,14 @@ const Profile = props => {
 
   const displayNameHandler = value => {
     setDisplayName(value);
-    setUpdatedStatus(null)
+    setUpdatedStatus(null);
+  };
+
+  const keyPressHandler = event => {
+    if (event.key === 'Enter') {
+      updateUserProfileHandler();
+      setUpdatedStatus(null);
+    }
   };
 
   const handleFileRead = e => {
@@ -104,6 +111,7 @@ const Profile = props => {
                 label="Username"
                 onChange={displayNameHandler}
                 value={displayName}
+                onKeyPress={keyPressHandler}
               />
             </div>
             <div className="text-right pt-3">

@@ -12,6 +12,7 @@ const ChatBar = () => {
 
   const sendMessageHandler = () => {
     sendNotEmptyMessage();
+    setMessage('');
   };
 
   const inputHandler = ({ target }) => {
