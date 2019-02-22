@@ -7,6 +7,7 @@ const initialState = {
   isError: null,
   errorMsg: null,
   checkoutErrorMsg: null,
+  checkoutIsPending: false,
   lastCheckout: null
 };
 

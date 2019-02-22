@@ -41,6 +41,8 @@ class Order extends Component {
   };
 
   onCheckout = () => {
+    if (this.props.checkoutIsPending) return;
+    
     this.setState({ checkoutDone: true });
     this.props.checkout(
       this.props.products,
@@ -120,7 +122,8 @@ const mapStateToProps = ({ products, auth }) => ({
   products: products.products,
   user: auth.user,
   lastCheckout: products.lastCheckout,
-  errorMsg: products.checkoutErrorMsg
+  errorMsg: products.checkoutErrorMsg,
+  checkoutIsPending: products.checkoutIsPending
 });
 
 const mapDispatchToProps = dispatch => ({
