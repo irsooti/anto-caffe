@@ -1,20 +1,22 @@
 .modal {
-    display: inline-flex;
-    background: #FFF;
-    padding: 25px;
-    border-radius: 7px;
-    box-shadow: 1px 1px 30px #CCC;
-    width: auto;
-    max-width: 100%;
-    position: relative;
-    align-self: flex-start;
-    margin-top: 10%
+  display: inline-flex;
+  background: #fff;
+  padding: 25px;
+  border-radius: 7px;
+  position: relative;
+  box-shadow: 1px 1px 30px #ccc;
+  width: auto;
+  max-width: 100%;
+  position: relative;
+  align-self: flex-start;
+  margin-top: 10%;
+  top: -110px;
 }
 
 .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    padding: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 15px;
 }

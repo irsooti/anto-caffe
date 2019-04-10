@@ -7,7 +7,10 @@ export default function Button({
   type,
   disabled = false,
   icon,
-  style
+  ref,
+  style,
+  onMouseOver,
+  onMouseLeave
 }) {
   let iconElement = icon ? (
     <span style={{ marginLeft: '10px' }} className={icon} />
@@ -15,6 +18,8 @@ export default function Button({
 
   return type === 'submit' ? (
     <input
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
       style={style}
       type="submit"
       value={text}
@@ -23,6 +28,9 @@ export default function Button({
     />
   ) : (
     <button
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
+      ref={ref}
       style={style}
       className={'btn btn--' + size + (disabled ? ' btn--disabled' : '')}
       onClick={!disabled ? onClick : null}

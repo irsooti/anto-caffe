@@ -27,9 +27,10 @@ class Order extends Component {
   };
 
   filteredProductsByDescription = () => {
-    return this.props.products.filter(product =>
+    const filteredRecords = this.props.products.filter(product =>
       product.descr.toLowerCase().includes(this.state.filter.toLowerCase())
     );
+    return filteredRecords;
   };
 
   removeFromCart = id => () => {
@@ -42,7 +43,7 @@ class Order extends Component {
 
   onCheckout = () => {
     if (this.props.checkoutIsPending) return;
-    
+
     this.setState({ checkoutDone: true });
     this.props.checkout(
       this.props.products,
@@ -75,6 +76,7 @@ class Order extends Component {
   };
 
   render() {
+    const filteredProducts = this.filteredProductsByDescription();
     const { products } = this.props;
     return (
       <div className={cssModule.OrderContainer}>
@@ -84,7 +86,8 @@ class Order extends Component {
             clearFilter={this.clearFilter}
             onChange={this.filterHandler}
           />
-          {this.filteredProductsByDescription().map(product => (
+
+          {filteredProducts.map(product => (
             <Product
               key={product.id}
               id={product.id}
@@ -94,6 +97,7 @@ class Order extends Component {
               onRemove={this.removeFromCart}
             />
           ))}
+
           <Product
             onAdd={this.props.addProductToDatabase}
             isAddingProduct={true}

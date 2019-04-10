@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect, useEffect } from 'react';
 import CssModule from './Product.module.css';
 import Button from '../../ui/Button/Button';
 import Input from '../../ui/Input/Input';
+import { TweenMax, TimelineMax } from 'gsap/all';
+import { Circ, Bounce } from 'gsap/EasePack';
+import { Elastic } from 'gsap';
 
 const ExistingProduct = ({
   descr,
@@ -10,6 +13,36 @@ const ExistingProduct = ({
   onAdd = () => {},
   onRemove = () => {}
 }) => {
+  // const onMouseEnterButton = ({ target }) => {
+  //   console.log(target);
+  //   TweenMax.to(target, 0.5, {
+  //     borderRadius: '50%',
+  //     ease: Circ.easeIn
+  //   });
+  // };
+
+  // const onMouseLeaveButton = ({ target }) => {
+  //   console.log(target);
+  //   TweenMax.to(target, 0.5, {
+  //     borderRadius: '7px',
+  //     ease: Circ.easeIn
+  //   });
+  // };
+  const tl = new TimelineMax();
+
+  const useTl = fn => ({ target }) => {
+    console.log(target);
+
+    tl.to(target, 0.2, {
+      transform: 'scale(1.2)'
+    }).to(target, 0.55, {
+      ease: Bounce.easeOut,
+      transform: 'scale(1)'
+    });
+
+    return fn();
+  };
+
   return (
     <>
       {quantity > 0 ? (
@@ -17,8 +50,12 @@ const ExistingProduct = ({
       ) : null}
       <div className={CssModule.description}>{descr}</div>
       <div className={CssModule.productController}>
-        <Button onClick={onAdd(id)} text="+" />
-        <Button disabled={quantity === 0} onClick={onRemove(id)} text="-" />
+        <Button onClick={useTl(onAdd(id))} text="+" />
+        <Button
+          disabled={quantity === 0}
+          onClick={useTl(onRemove(id))}
+          text="-"
+        />
       </div>
     </>
   );
@@ -53,7 +90,11 @@ class AddNewProduct extends React.Component {
           style={{ width: '100%', justifyContent: 'flex-end' }}
           className={CssModule.addProduct}
         >
-          <Button onClick={this.onClick} text="Aggiungi" />
+          <Button
+            onMouseOver={this.onMouseEnterButton}
+            onClick={this.onClick}
+            text="Aggiungi"
+          />
         </div>
       </div>
     );
