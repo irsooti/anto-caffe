@@ -70,7 +70,7 @@ class CollectiveOrders extends Component {
           <div className={cssModule.fullHeightContainer}>
             <div className={cssModule.container}>
               <div className={cssModule.title}>
-                <h3>Ordini {console.log(orderer)}</h3>
+                <h3>Ordini</h3>
               </div>
               <div className={cssModule.body}>
                 {orders.length === 0 ? (

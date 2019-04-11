@@ -43,15 +43,6 @@ export default class Toolbar extends Component {
                 onClick={onToggle}
                 className={cssModule.navItem}
                 exact
-                to="/profile"
-              >
-                Profilo
-              </NavLink>
-
-              <NavLink
-                onClick={onToggle}
-                className={cssModule.navItem}
-                exact
                 to="/myorder"
               >
                 I Miei ordini

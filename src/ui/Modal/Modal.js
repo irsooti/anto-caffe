@@ -1,9 +1,8 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import Backdrop from '../Backdrop/Backdrop';
 import cssModule from './Modal.module.css';
-import { TweenMax, TimelineMax } from 'gsap/all';
+import { TweenMax } from 'gsap/all';
 import { Elastic } from 'gsap/EasePack';
-import { Transition } from 'react-transition-group';
 
 function Modal({ children, visible = false, toggle = () => {} }) {
   const ref = useRef(null);

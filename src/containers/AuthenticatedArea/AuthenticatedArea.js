@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import Order from '../Order/Order';
 import cssModule from './AuthenticatedArea.module.css';
 import CollectiveOrders from '../CollectiveOrders/CollectiveOrders';
 import NotFound from '../NotFound/NotFound';
-import Button from '../../ui/Button/Button';
 import { logoutFlow } from '../../store/actions/auth';
 import Toolbar from '../Toolbar/Toolbar';
 import MessageBar from '../../ui/MessageBar/MessageBar';
@@ -15,6 +14,7 @@ import Profile from '../Profile/Profile';
 import Chat from '../Chat/Chat';
 import { onLockDailyChange } from '../../api/orders';
 import AuthenticatedContext from './AuthenticatedContext';
+import defaultAvatar from '../../assets/avatar.svg';
 const { REACT_APP_INFO } = process.env;
 
 const getOrderHHSS = isoDate => {
@@ -25,7 +25,8 @@ const getOrderHHSS = isoDate => {
 class AuthenticatedArea extends Component {
   state = {
     toolbarIsOpen: false,
-    orderer: null
+    orderer: null,
+    profileMenuIsActive: false
   };
 
   toggleToolbar = () => {
@@ -36,6 +37,12 @@ class AuthenticatedArea extends Component {
     onLockDailyChange(resp => {
       this.setState({ orderer: resp });
     });
+  };
+
+  toggleProfileMenu = () => {
+    this.setState(state => ({
+      profileMenuIsActive: !state.profileMenuIsActive
+    }));
   };
 
   render() {
@@ -52,14 +59,42 @@ class AuthenticatedArea extends Component {
           </span>
         </div>
         <div className="nav--right">
-          <span>
-            <Button
-              onClick={this.props.onLogout}
-              type="small"
-              size="md"
-              text="Logout"
+          <div
+            onClick={this.toggleProfileMenu}
+            className={[
+              cssModule.profileSection,
+              this.state.profileMenuIsActive ? 'active' : ''
+            ].join(' ')}
+          >
+            <div
+              style={{
+                backgroundImage: `url(${
+                  this.props.avatar ? this.props.avatar : defaultAvatar
+                })`
+              }}
+              className={[cssModule.avatar].join(' ')}
             />
-          </span>
+            <div className={cssModule.profile}>{this.props.displayName}</div>
+            <div
+              style={{ display: this.state.profileMenuIsActive ? '' : 'none' }}
+              className={cssModule.profileMenu}
+            >
+              <div className={cssModule.menuItems}>
+                <NavLink className={cssModule.menuItem} exact to="/profile">
+                  Profilo
+                </NavLink>
+                <div
+                  className={cssModule.menuItem}
+                  onClick={this.props.onLogout}
+                >
+                  Logout
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <span>
+
+          </span> */}
         </div>
       </nav>
     );
@@ -87,8 +122,8 @@ class AuthenticatedArea extends Component {
         {navbar}
         {orderer ? (
           <MessageBar status="success">
-            Colazione già ordinata da {orderer.displayName} ({orderer.email}) alle{' '}
-            {getOrderHHSS(orderer.timestamp)}{' '}
+            Colazione già ordinata da {orderer.displayName} ({orderer.email})
+            alle {getOrderHHSS(orderer.timestamp)}{' '}
           </MessageBar>
         ) : (
           <MessageBar status="info">{REACT_APP_INFO}</MessageBar>
@@ -132,7 +167,8 @@ class AuthenticatedArea extends Component {
 const mapStateToProps = state => ({
   displayName: state.auth.user.displayName,
   emailVerified: state.auth.user.emailVerified,
-  email: state.auth.user.email
+  email: state.auth.user.email,
+  avatar: state.auth.user.photoURL
 });
 
 const mapDispatchToProps = dispatch => {

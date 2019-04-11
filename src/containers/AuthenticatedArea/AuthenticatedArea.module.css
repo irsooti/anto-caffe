@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.layout>div {
+.layout > div {
   max-width: 1200px;
   margin: auto;
 }
@@ -53,6 +53,70 @@
   animation: pulse 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
 }
 
+.profileSection {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 101;
+  cursor: pointer;
+}
+
+.profileSection:hover,
+.profileSection:global(.active) {
+  color: #2b2b2b;
+  background: #fff;
+}
+
+.menuItems {
+  position: relative;
+}
+
+.menuItem:hover {
+  background: #2b2b2b;
+  color: #fff;
+}
+
+.menuItem {
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 15px 15px;
+  color: #2b2b2b;
+  cursor: pointer;
+  display: block;
+}
+
+.profileMenu {
+  position: absolute;
+  transition: 1s;
+  display: block;
+  overflow: hidden;
+  top: 100%;
+  right: 0;
+  z-index: 200;
+  min-width: 100%;
+  background: #fff;
+  box-shadow: -10px 10px 10px rgba(204, 204, 204, 0.459);
+  border-bottom-left-radius: 7px;
+}
+.profile {
+  width: 140px;
+}
+.avatar {
+  width: 52px;
+  height: 52px;
+  background-size: cover;
+  background-position: center center; 
+  margin: 10px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.avatar img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+
 .envelop {
   display: flex;
   font-size: 2rem;
@@ -70,18 +134,18 @@
 
 .mailBlockContent {
   font-size: 1.5em;
-  line-height: 1.6
+  line-height: 1.6;
 }
 
 @keyframes pulse {
   0% {
     /* box-shadow: 1px 1px 100px #ccc; */
-    transform: rotate(.5deg)
+    transform: rotate(0.5deg);
   }
   50% {
-    transform: rotate(-1deg)
+    transform: rotate(-1deg);
   }
   100% {
-    transform: rotate(.5deg)
+    transform: rotate(0.5deg);
   }
 }

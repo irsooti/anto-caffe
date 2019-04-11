@@ -17,18 +17,15 @@ const ChatScreen = ({ currentUserId }) => {
     };
   }, []);
 
-  useEffect(
-    () => {
-      setTimeout(() => {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          left: 0,
-          behavior: 'smooth'
-        });
-      }, 100);
-    },
-    [messages]
-  );
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  }, [messages]);
 
   return (
     <div className="column full" style={{ paddingBottom: '100px' }}>

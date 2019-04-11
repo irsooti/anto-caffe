@@ -1,10 +1,8 @@
-import React, { useRef, useLayoutEffect, useEffect } from 'react';
+import React from 'react';
 import CssModule from './Product.module.css';
 import Button from '../../ui/Button/Button';
 import Input from '../../ui/Input/Input';
-import { TweenMax, TimelineMax } from 'gsap/all';
-import { Circ, Bounce } from 'gsap/EasePack';
-import { Elastic } from 'gsap';
+import { TimelineMax, Bounce } from 'gsap/all';
 
 const ExistingProduct = ({
   descr,
@@ -31,8 +29,6 @@ const ExistingProduct = ({
   const tl = new TimelineMax();
 
   const useTl = fn => ({ target }) => {
-    console.log(target);
-
     tl.to(target, 0.2, {
       transform: 'scale(1.2)'
     }).to(target, 0.55, {
