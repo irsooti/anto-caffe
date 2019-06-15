@@ -52,6 +52,7 @@ class AuthenticatedArea extends Component {
         <div className="nav--left">
           <span
             className="nav-item"
+            aria-label="Vai al menu"
             style={{ cursor: 'pointer', padding: '15px 25px' }}
             onClick={this.toggleToolbar}
           >

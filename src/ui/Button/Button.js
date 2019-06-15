@@ -8,6 +8,7 @@ export default function Button({
   disabled = false,
   icon,
   ref,
+  ariaLabel,
   style,
   onMouseOver,
   onMouseLeave
@@ -20,6 +21,7 @@ export default function Button({
     <input
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
+      aria-label={ariaLabel}
       style={style}
       type="submit"
       value={text}
@@ -28,6 +30,7 @@ export default function Button({
     />
   ) : (
     <button
+      aria-label={ariaLabel}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
       ref={ref}

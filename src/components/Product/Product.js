@@ -46,8 +46,13 @@ const ExistingProduct = ({
       ) : null}
       <div className={CssModule.description}>{descr}</div>
       <div className={CssModule.productController}>
-        <Button onClick={useTl(onAdd(id))} text="+" />
         <Button
+          ariaLabel={`Aggiungi un'ordinazione di ${descr} al carrello`}
+          onClick={useTl(onAdd(id))}
+          text="+"
+        />
+        <Button
+          ariaLabel={`Rimuovi un'ordinazione di ${descr} dal carrello`}
           disabled={quantity === 0}
           onClick={useTl(onRemove(id))}
           text="-"

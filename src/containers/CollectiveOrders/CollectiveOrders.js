@@ -87,6 +87,9 @@ class CollectiveOrders extends Component {
                   if (totalOrders[orderId].quantity === 0) return null;
                   return (
                     <div
+                      aria-label={`Chi ha ordinao per ${
+                        totalOrders[orderId].descr
+                      }`}
                       onClick={() => {
                         this.setState({
                           lastProductSelectedName: totalOrders[orderId].descr
@@ -136,7 +139,10 @@ class CollectiveOrders extends Component {
                   </div>
                   {Object.keys(whoOrder).map(email => (
                     <div key={email}>
-                      <NavLink to={`${this.props.match.path}/${email}`}>
+                      <NavLink
+                        aria-label={`Le ordinazioni di ${whoOrder[email]}`}
+                        to={`${this.props.match.path}/${email}`}
+                      >
                         {whoOrder[email]} - {email}
                       </NavLink>
                     </div>
@@ -154,7 +160,8 @@ class CollectiveOrders extends Component {
                 </div>
                 <div className="gutter">
                   Sicuro di voler ordinare? <br />
-                  Confermando non sarà più possibile modificare tutti gli altri ordini.
+                  Confermando non sarà più possibile modificare tutti gli altri
+                  ordini.
                 </div>
                 <hr style={{ margin: '15px' }} className="hr" />
                 <div className="text-right">

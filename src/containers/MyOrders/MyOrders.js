@@ -116,6 +116,7 @@ class MyOrders extends Component {
                       </span>
                       <span className={cssModule.orderCount}>
                         <MyOrderChanger
+                          descr={totalOrders[orderId].descr}
                           onAdd={this.addQuantityHandler(orderId)}
                           onRemove={this.removeQuantityHandler(orderId)}
                           quantity={totalOrders[orderId].quantity}
