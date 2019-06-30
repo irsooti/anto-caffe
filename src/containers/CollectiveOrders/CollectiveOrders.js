@@ -7,11 +7,15 @@ import { Route, NavLink, Switch } from 'react-router-dom';
 import { ordersReducer, getWhoOrder, whoOrderThis } from '../../utils/order';
 import UserOrder from '../../components/UserOrders/UserOrder';
 import Modal from '../../ui/Modal/Modal';
-import { normalizeToDashcase } from '../../utils/data';
+import { normalizeToDashcase, getTodayPath } from '../../utils/data';
 import { lockDailyOrders } from '../../api/orders';
 import AuthenticatedContext from '../AuthenticatedArea/AuthenticatedContext';
 
-const { REACT_APP_ANTO_TEL, REACT_APP_ANTO_CELL } = process.env;
+const {
+  REACT_APP_ANTO_TEL,
+  REACT_APP_ANTO_CELL,
+  REACT_APP_INCOMING_LINK
+} = process.env;
 class CollectiveOrders extends Component {
   state = {
     lastProductSelectedName: '',
@@ -44,8 +48,12 @@ class CollectiveOrders extends Component {
 
       return text;
     });
-
-    text = text + '\nTi ringrazio!';
+    text =
+      text +
+      `
+      Ti ringrazio!\n
+      Quando stai per salire, clicca su questo link: ${REACT_APP_INCOMING_LINK}/code/${getTodayPath()} così verremo avvisati!
+    `;
 
     return encodeURI(text);
   };
